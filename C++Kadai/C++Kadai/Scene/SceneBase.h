@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 
 enum eSceneType
 {
@@ -18,10 +19,11 @@ public:
 	//デストラクタ
 	~SceneBase();
 
-	virtual void Initialize();
-	virtual eSceneType Update();
-	virtual void Draw()const;
-	virtual void Finalize();
+	virtual void Initialize();		//初期化処理
+	virtual eSceneType Update();	//更新処理
+	virtual void Draw() const;		//描画処理
+	virtual void Finalize();		//終了時処理
+
 
 	virtual eSceneType GetNowSceneType()const = 0;
 protected:

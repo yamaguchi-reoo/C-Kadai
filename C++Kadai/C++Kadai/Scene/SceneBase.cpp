@@ -14,7 +14,7 @@ void SceneBase::Initialize()
 
 eSceneType SceneBase::Update()
 {
-	return eSceneType();
+	return GetNowSceneType();
 }
 
 void SceneBase::Draw() const
