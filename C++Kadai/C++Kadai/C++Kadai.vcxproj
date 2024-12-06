@@ -133,6 +133,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Character\Enemy\EnemyRed.cpp" />
+    <ClCompile Include="Object\Character\Enemy\EnemyPurple.cpp" />
+    <ClCompile Include="Object\Character\Enemy\EnemyBase.cpp" />
+    <ClCompile Include="Object\Character\CharacterBase.cpp" />
+    <ClCompile Include="Object\GameObjret.cpp" />
+    <ClCompile Include="Object\Character\Player\Player.cpp" />
     <ClCompile Include="Utility\ResourceManager.cpp" />
     <ClCompile Include="Utility\InputControl.cpp" />
     <ClCompile Include="Scene\GameScene\ResultScene.cpp" />
@@ -145,6 +151,12 @@
     <ClCompile Include="Utility\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Object\Character\Enemy\EnemyRed.h" />
+    <ClInclude Include="Object\Character\Enemy\EnemyPurple.h" />
+    <ClInclude Include="Object\Character\Enemy\EnemyBase.h" />
+    <ClInclude Include="Object\Character\CharacterBase.h" />
+    <ClInclude Include="Object\GameObject.h" />
+    <ClInclude Include="Object\Character\Player\Player.h" />
     <ClInclude Include="Utility\ResourceManager.h" />
     <ClInclude Include="Utility\InputControl.h" />
     <ClInclude Include="Scene\GameScene\ResultScene.h" />
