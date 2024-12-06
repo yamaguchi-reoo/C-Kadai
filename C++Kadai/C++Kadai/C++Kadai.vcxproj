@@ -133,6 +133,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Stage\Ground.cpp" />
+    <ClCompile Include="Object\Item\EnergyDrink.cpp" />
+    <ClCompile Include="Object\Item\Coin.cpp" />
+    <ClCompile Include="Object\Item\ItemBase.cpp" />
+    <ClCompile Include="Object\Gimmick\GaolFlag.cpp" />
+    <ClCompile Include="Object\Gimmick\GimmickBase.cpp" />
     <ClCompile Include="Object\Character\Enemy\EnemyRed.cpp" />
     <ClCompile Include="Object\Character\Enemy\EnemyPurple.cpp" />
     <ClCompile Include="Object\Character\Enemy\EnemyBase.cpp" />
@@ -151,6 +157,12 @@
     <ClCompile Include="Utility\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Object\Stage\Ground.h" />
+    <ClInclude Include="Object\Item\EnergyDrink.h" />
+    <ClInclude Include="Object\Item\Coin.h" />
+    <ClInclude Include="Object\Item\ItemBase.h" />
+    <ClInclude Include="Object\Gimmick\GaolFlag.h" />
+    <ClInclude Include="Object\Gimmick\GimmickBase.h" />
     <ClInclude Include="Object\Character\Enemy\EnemyRed.h" />
     <ClInclude Include="Object\Character\Enemy\EnemyPurple.h" />
     <ClInclude Include="Object\Character\Enemy\EnemyBase.h" />
