@@ -1,6 +1,6 @@
 #pragma once
 #include "../Utility/Vector2D.h"
-enum eObjectType
+enum class eObjectType
 {
 	Player,
 	Enemy,

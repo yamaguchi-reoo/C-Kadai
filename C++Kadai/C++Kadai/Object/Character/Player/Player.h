@@ -2,7 +2,7 @@
 #include "../CharacterBase.h"
 #include <vector>
 
-enum PlayerState
+enum class PlayerState
 {
     eIDLE,
     eMOVE,
