@@ -1,5 +1,13 @@
 #include "CharacterBase.h"
 
+CharacterBase::CharacterBase()
+{
+}
+
+CharacterBase::~CharacterBase()
+{
+}
+
 void CharacterBase::Initialize(Vector2D _location, Vector2D _box_size)
 {
 }
