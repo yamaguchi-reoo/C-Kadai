@@ -15,7 +15,7 @@ SceneManager::~SceneManager()
 
 void SceneManager::Initialize()
 {
-	ChangeScene(eSceneType::TITLE);
+	ChangeScene(eSceneType::GAME_MAIN);
 }
 
 void SceneManager::Update()

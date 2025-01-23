@@ -143,7 +143,7 @@
     <ClCompile Include="Object\Character\Enemy\EnemyPurple.cpp" />
     <ClCompile Include="Object\Character\Enemy\EnemyBase.cpp" />
     <ClCompile Include="Object\Character\CharacterBase.cpp" />
-    <ClCompile Include="Object\GameObjret.cpp" />
+    <ClCompile Include="Object\GameObject.cpp" />
     <ClCompile Include="Object\Character\Player\Player.cpp" />
     <ClCompile Include="Utility\ResourceManager.cpp" />
     <ClCompile Include="Utility\InputControl.cpp" />

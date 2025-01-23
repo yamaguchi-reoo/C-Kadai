@@ -45,7 +45,7 @@
     <ClCompile Include="Utility\UserTemplate.h">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Object\GameObjret.cpp">
+    <ClCompile Include="Object\GameObject.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="Object\Character\CharacterBase.cpp">
