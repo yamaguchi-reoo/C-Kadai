@@ -2,8 +2,12 @@
 #include "Player.h"
 #include "../../../Utility/InputControl.h"
 #include "../../../Utility/ResourceManager.h"
+#include "../../../Utility/UserTemplate.h"
+#include "../../../Utility/DebugInfomation.h"
 
-Player::Player() : player_state(PlayerState::eIDLE),animation_data(),animation_count()
+#define GRAVITY (9.087f)
+
+Player::Player() : player_state(PlayerState::eIDLE),animation_data(),animation_count(),g_velocity(0.0f),jump_flag(false)
 {
 }
 
@@ -16,6 +20,9 @@ void Player::Initialize(Vector2D _location, Vector2D _box_size)
 	__super::Initialize(_location, _box_size);
 
 	hp = 5;
+	velocity = { 0.0f };
+	g_velocity = 0.0f;
+
 	//アニメーション画像の読み込み
 	ResourceManager* rm = ResourceManager::GetInstance();
 	std::vector<int> tmp;
@@ -42,6 +49,8 @@ void Player::Draw(Vector2D _camera_location) const
 {
 	//親クラスに書かれた描画処理の内容を実行する
 	__super::Draw(_camera_location);
+
+	DebugInfomation::Add("flg", jump_flag);
 }
 
 void Player::Finalize()
@@ -54,42 +63,96 @@ void Player::Movement()
 	//入力情報の取得
 	InputControl* input = InputControl::GetInstance();
 
-	//左右移動
-	if (input->GetKey(KEY_INPUT_LEFT))player_state = PlayerState::eLEFT;
-	if (input->GetKey(KEY_INPUT_RIGHT))player_state = PlayerState::eRIGHT;
-
-	//ジャンプ
-	if (input->GetKey(KEY_INPUT_UP))player_state = PlayerState::eJump;
-
 	switch (player_state)
 	{		
 		//何も動いていない状態（待機）
 	case PlayerState::eIDLE:
+
+		// 待機状態（キーが押されていないときの減速処理）
+		if (velocity.x < -1e-6f) // 左向きの速度を減らす
+		{
+			velocity.x = Min<float>(velocity.x + 0.1f, 0.0f); // 徐々に0に近づける
+		}
+		else if (velocity.x > 1e-6f) // 右向きの速度を減らす
+		{
+			velocity.x = Max<float>(velocity.x - 0.1f, 0.0f); // 徐々に0に近づける
+		}
+
 		//左右移動
 		if (input->GetKey(KEY_INPUT_LEFT))player_state = PlayerState::eLEFT;
 		else if (input->GetKey(KEY_INPUT_RIGHT))player_state = PlayerState::eRIGHT;
-		//ジャンプ
-		else if (input->GetKey(KEY_INPUT_UP))player_state = PlayerState::eJump;
 
+		//ジャンプ
+		if (!jump_flag) {
+			if (input->GetKeyDown(KEY_INPUT_UP) || input->GetKeyDown(KEY_INPUT_SPACE))
+			{
+				player_state = PlayerState::eJUMP;
+			}
+		}
 		break;
+		//左矢印キーを押したら
 	case PlayerState::eLEFT:
-		velocity.x -= 0.5;
+		velocity.x -= 0.25;
+		flip_flag = TRUE;      // 左向きフラグをセット
+
 		//左キーが離されたら
 		if (!input->GetKey(KEY_INPUT_LEFT))player_state = PlayerState::eIDLE;
+
+		//ジャンプ
+		if (!jump_flag) {
+			if (input->GetKeyDown(KEY_INPUT_UP) || input->GetKeyDown(KEY_INPUT_SPACE))
+			{
+				player_state = PlayerState::eJUMP;
+			}
+		}
 		break;
+		//右矢印キーを押したら
 	case PlayerState::eRIGHT:
-		velocity.x += 0.5;
+		velocity.x += 0.25;
+		flip_flag = FALSE;      // 左向きフラグをセット
+
 		//左キーが離されたら
 		if (!input->GetKey(KEY_INPUT_RIGHT))player_state = PlayerState::eIDLE;
+
+		//ジャンプ
+		if (!jump_flag) {
+			if (input->GetKeyDown(KEY_INPUT_UP) || input->GetKeyDown(KEY_INPUT_SPACE))
+			{
+				player_state = PlayerState::eJUMP;
+			}
+		}
 		break;
-	case PlayerState::eJump:
+		//ジャンプキー押したら
+	case PlayerState::eJUMP:
+		jump_flag = true;
+		velocity.y -= 4.0f;
+		//ジャンプキーが離されたら
+		if (!input->GetKeyDown(KEY_INPUT_UP))player_state = PlayerState::eIDLE;
 		break;
-	case PlayerState::eDamege:
+	case PlayerState::eDAMAGE:
 		break;
 	case PlayerState::eDEAD:
 		break;
 	default:
 		break;
+	}
+
+	// 最大速度を制限
+	float max_speed = 5.0f;  // 最大速度
+	velocity.x = Min<float>(Max<float>(velocity.x, -max_speed), max_speed);
+
+	//重力加速度
+	g_velocity += GRAVITY / 444.0f;
+	velocity.y += g_velocity;// 重力を加算
+	location.y += velocity.y;
+
+	//!!!地面との当たり判定ができ次第削除!!!!
+	if (location.y >= 400.0f)
+	{
+		location.y = 400.0f;
+		velocity.y = 0.0f;
+		g_velocity = 0.0f;
+		jump_flag = false;
 	}
 
 	// 位置を更新
@@ -103,11 +166,11 @@ void Player::AnimationControl()
 	animation_count++;
 
 	//
-	if (animation_count >= 30)
+	if (animation_count >= 10)
 	{
-		//
+		////カウントを0クリアする
 		animation_count = 0;
-		//
+		//画像の切替を行う
 		if (image == animation_data[0])
 		{
 			image = animation_data[1];

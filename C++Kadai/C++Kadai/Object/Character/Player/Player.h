@@ -7,8 +7,8 @@ enum class PlayerState
     eIDLE,
     eLEFT,
     eRIGHT,
-    eJump,
-    eDamege,
+    eJUMP,
+    eDAMAGE,
     eDEAD
 };
 
@@ -20,6 +20,8 @@ private:
     std::vector<int> animation_data;//アニメーションデータ
 
     int animation_count;    //アニメーションカウント
+    float g_velocity;       //重力加速度
+    bool jump_flag;         //ジャンプフラグ
 
 public:
     Player();
