@@ -3,6 +3,7 @@
 #include "GameScene/TitleScene.h"
 #include "GameScene/ResultScene.h"
 #include "GameScene/GameMainScene.h"
+#include "../Utility/DebugInfomation.h"
 
 SceneManager::SceneManager() :current_scene(nullptr)
 {
@@ -20,6 +21,9 @@ void SceneManager::Initialize()
 
 void SceneManager::Update()
 {
+
+	//デバッグ表示の更新
+	DebugInfomation::Update();
 	eSceneType next_scene_type = current_scene->Update();
 
 	current_scene->Draw();

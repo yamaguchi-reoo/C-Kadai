@@ -133,6 +133,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Utility\FpsController.cpp" />
+    <ClCompile Include="Utility\DebugInfomation.cpp" />
     <ClCompile Include="Object\Stage\Ground.cpp" />
     <ClCompile Include="Object\Item\EnergyDrink.cpp" />
     <ClCompile Include="Object\Item\Coin.cpp" />
@@ -157,6 +159,8 @@
     <ClCompile Include="Utility\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Utility\FpsController.h" />
+    <ClInclude Include="Utility\DebugInfomation.h" />
     <ClInclude Include="Object\Stage\Ground.h" />
     <ClInclude Include="Object\Item\EnergyDrink.h" />
     <ClInclude Include="Object\Item\Coin.h" />

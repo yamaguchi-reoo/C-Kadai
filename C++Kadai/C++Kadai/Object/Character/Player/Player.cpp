@@ -1,6 +1,6 @@
 #include "Player.h"
 
-Player::Player()
+Player::Player() : player_state(PlayerState::eIDLE),animation_data()
 {
 }
 
@@ -10,6 +10,7 @@ Player::~Player()
 
 void Player::Initialize(Vector2D _location, Vector2D _box_size)
 {
+	//box_size
 }
 
 void Player::Update()
