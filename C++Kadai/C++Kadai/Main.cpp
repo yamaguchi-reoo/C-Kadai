@@ -24,6 +24,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 	//fps制御
 	FpsController* FPSC = new FpsController(FRAMERATE, 800);
+	ResourceManager* rm = ResourceManager::GetInstance();
 
 	try {
 		manager = new SceneManager();
@@ -37,8 +38,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			//入力情報の更新
 			input->Update();
 
+			//画面の初期化
 			ClearDrawScreen();
 
+			//画面の更新
 			manager->Update();
 
 
@@ -66,7 +69,10 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		return -1;
 	}
 
+	//インスタンスの削除
 	InputControl::DeleteInstance();
+	rm->DeleteInstance();
+	ResourceManager::DeleteInstance();
 
 	if (manager != nullptr)
 	{

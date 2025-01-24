@@ -2,7 +2,8 @@
 #include "InputControl.h"
 
 std::unordered_map<const char*, float>DebugInfomation::draw_list;
-bool DebugInfomation::draw_flg = false;
+//bool DebugInfomation::draw_flg = false;
+bool DebugInfomation::draw_flg = true;
 bool DebugInfomation::photograph_mode = false;
 
 void DebugInfomation::Update()

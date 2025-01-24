@@ -1,10 +1,11 @@
 #pragma once
 #include "../GameObject.h"
+#include "../../Utility/Vector2D.h"
 class CharacterBase :
     public GameObject
 {
 protected:
-    int hp;
+    int hp = 0;
     Vector2D velocity;
 
 public:

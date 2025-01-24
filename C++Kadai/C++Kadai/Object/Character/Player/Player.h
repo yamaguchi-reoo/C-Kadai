@@ -5,7 +5,8 @@
 enum class PlayerState
 {
     eIDLE,
-    eMOVE,
+    eLEFT,
+    eRIGHT,
     eJump,
     eDamege,
     eDEAD
@@ -15,8 +16,10 @@ class Player :
     public CharacterBase
 {
 private:
-    PlayerState player_state;
-    std::vector<int> animation_data;
+    PlayerState player_state;       //プレイヤーの状態
+    std::vector<int> animation_data;//アニメーションデータ
+
+    int animation_count;    //アニメーションカウント
 
 public:
     Player();
@@ -32,14 +35,18 @@ public:
     void Finalize()override;
 
 public:
-
+    //プレイヤーの動き
     void Movement();
+    //アニメーション管理
     void AnimationControl();
+    //当たった時の挙動
     void OnHitCollision(GameObject* hit_object)override;
 
-
+    //無敵状態
     void InvincibleState();
+    //プレイヤー状態の取得
     PlayerState GetPlayerState();
+    //HPの取得
     int GetPlayerHp();
 };
 

@@ -1,6 +1,7 @@
 #include "GameMainScene.h"
 #include "../../Utility/InputControl.h"
 #include <DxLib.h>
+#include "../../Object/Character/Player/Player.h"
 
 GameMainScene::GameMainScene()
 {
@@ -12,6 +13,7 @@ GameMainScene::~GameMainScene()
 
 void GameMainScene::Initialize()
 {
+	CreateObject<Player>(Vector2D(32.0f,300.0f), Vector2D(32.0f));
 }
 
 eSceneType GameMainScene::Update()
@@ -28,11 +30,12 @@ eSceneType GameMainScene::Update()
 		return eSceneType::RESULT;
 	}
 
-	return GetNowSceneType();
+	return __super::Update();
 }
 
 void GameMainScene::Draw() const
 {
+	__super::Draw();
 	DrawFormatString(10, 10, GetColor(255, 255, 255), "メイン画面");
 }
 

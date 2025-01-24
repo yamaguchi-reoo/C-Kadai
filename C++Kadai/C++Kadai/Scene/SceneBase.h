@@ -32,7 +32,7 @@ public:
 protected:
 	//ゲームオブジェクトを生成するテンプレート関数
 	template <class T>
-	T* CreateObject(const Vector2D& location)
+	T* CreateObject(const Vector2D& _location, const Vector2D& _box_size)
 	{
 		//新しいインスタンスを生成
 		T* new_instance = new T();
@@ -45,9 +45,9 @@ protected:
 			throw("ゲームオブジェクトが生成できませんでした\n");
 		}
 
-		new_object->SetLocation(location);
+		new_object->SetLocation(_location);
 
-		new_object->Initialize();
+		new_object->Initialize(_location, _box_size);
 
 		objects.push_back(new_object);
 

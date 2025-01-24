@@ -12,9 +12,11 @@ enum class eObjectType
 class GameObject
 {
 protected:
-	Vector2D location;
-	Vector2D box_size;
-	int image;
+	Vector2D location;	//オブジェクトの位置
+	Vector2D box_size;	//オブジェクトのサイズ
+	int image;			//描画する画像データ
+	int flip_flag;		//描画する反転フラグ
+
 	eObjectType object_type;
 
 public:
@@ -31,14 +33,14 @@ public:
 	virtual void Finalize();
 
 public:
-
+	//座標を設定
 	void SetLocation(Vector2D _location);
-
+	//座標を取得
 	Vector2D GetLocation()const;
-
+	//ボックスサイズを取得
 	Vector2D GetBoxSize()const;
 
-	eObjectType GetObjctType();
+	eObjectType GetObjectType();
 
 	virtual void OnHitCollision(GameObject* hit_object);
 

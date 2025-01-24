@@ -1,9 +1,11 @@
 #pragma once
 #include "../SceneBase.h"
+#include "../../Object/Character/Player/Player.h"
 
 class GameMainScene : 
 	public SceneBase
 {
+private:
 public:
 	GameMainScene();
 	~GameMainScene();
