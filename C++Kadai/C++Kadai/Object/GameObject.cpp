@@ -62,6 +62,6 @@ void GameObject::OnHitCollision(GameObject* hit_object)
 {
 }
 
-void GameObject::CheckBoxCollision(GameObject)
+void GameObject::CheckBoxCollision(GameObject* obj)
 {
 }

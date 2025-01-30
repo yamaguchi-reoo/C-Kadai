@@ -12,7 +12,7 @@ enum class PlayerState
     eDEAD
 };
 
-class Player :
+class PLAYER :
     public CharacterBase
 {
 private:
@@ -24,8 +24,8 @@ private:
     bool jump_flag;         //ジャンプフラグ
 
 public:
-    Player();
-    ~Player();
+    PLAYER();
+    ~PLAYER();
 
     //初期化処理
     void Initialize(Vector2D _location, Vector2D _box_size) override;

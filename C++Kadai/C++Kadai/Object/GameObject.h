@@ -2,11 +2,11 @@
 #include "../Utility/Vector2D.h"
 enum class eObjectType
 {
-	Player,
-	Enemy,
-	Item,
-	Gimmick,
-	Block
+	PLAYER,
+	ENEMY,
+	ITEM,
+	GIMMICK,
+	BLOCK
 };
 
 class GameObject
@@ -45,7 +45,8 @@ public:
 	virtual void OnHitCollision(GameObject* hit_object);
 
 private:
-	void CheckBoxCollision(GameObject);
+	//当たり判定
+	void CheckBoxCollision(GameObject* obj);
 
 };
 

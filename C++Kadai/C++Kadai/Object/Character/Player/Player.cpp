@@ -7,18 +7,19 @@
 
 #define GRAVITY (9.087f)
 
-Player::Player() : player_state(PlayerState::eIDLE),animation_data(),animation_count(),g_velocity(0.0f),jump_flag(false)
+PLAYER::PLAYER() : player_state(PlayerState::eIDLE),animation_data(),animation_count(),g_velocity(0.0f),jump_flag(false)
 {
 }
 
-Player::~Player()
+PLAYER::~PLAYER()
 {
 }
 
-void Player::Initialize(Vector2D _location, Vector2D _box_size)
+void PLAYER::Initialize(Vector2D _location, Vector2D _box_size)
 {
 	__super::Initialize(_location, _box_size);
 
+	object_type = eObjectType::PLAYER;
 	hp = 5;
 	velocity = { 0.0f };
 	g_velocity = 0.0f;
@@ -36,7 +37,7 @@ void Player::Initialize(Vector2D _location, Vector2D _box_size)
 	animation_count = 0;
 }
 
-void Player::Update()
+void PLAYER::Update()
 {
 	//移動処理
 	Movement();
@@ -45,7 +46,7 @@ void Player::Update()
 	AnimationControl();
 }
 
-void Player::Draw(Vector2D _camera_location) const
+void PLAYER::Draw(Vector2D _camera_location) const
 {
 	//親クラスに書かれた描画処理の内容を実行する
 	__super::Draw(_camera_location);
@@ -53,12 +54,12 @@ void Player::Draw(Vector2D _camera_location) const
 	DebugInfomation::Add("flg", jump_flag);
 }
 
-void Player::Finalize()
+void PLAYER::Finalize()
 {
 	animation_data.clear();
 }
 
-void Player::Movement()
+void PLAYER::Movement()
 {
 	//入力情報の取得
 	InputControl* input = InputControl::GetInstance();
@@ -160,7 +161,7 @@ void Player::Movement()
 }
 
 
-void Player::AnimationControl()
+void PLAYER::AnimationControl()
 {
 	//カウントの更新
 	animation_count++;
@@ -182,20 +183,20 @@ void Player::AnimationControl()
 	}
 }
 
-void Player::OnHitCollision(GameObject* hit_object)
+void PLAYER::OnHitCollision(GameObject* hit_object)
 {
 }
 
-void Player::InvincibleState()
+void PLAYER::InvincibleState()
 {
 }
 
-PlayerState Player::GetPlayerState()
+PlayerState PLAYER::GetPlayerState()
 {
 	return PlayerState();
 }
 
-int Player::GetPlayerHp()
+int PLAYER::GetPlayerHp()
 {
 	return 0;
 }
