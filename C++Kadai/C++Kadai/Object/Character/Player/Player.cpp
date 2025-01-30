@@ -7,15 +7,15 @@
 
 #define GRAVITY (9.087f)
 
-PLAYER::PLAYER() : player_state(PlayerState::eIDLE),animation_data(),animation_count(),g_velocity(0.0f),jump_flag(false)
+Player::Player() : player_state(PlayerState::eIDLE),animation_data(),animation_count()/*,g_velocity(0.0f)*/,jump_flag(false)
 {
 }
 
-PLAYER::~PLAYER()
+Player::~Player()
 {
 }
 
-void PLAYER::Initialize(Vector2D _location, Vector2D _box_size)
+void Player::Initialize(Vector2D _location, Vector2D _box_size)
 {
 	__super::Initialize(_location, _box_size);
 
@@ -33,12 +33,14 @@ void PLAYER::Initialize(Vector2D _location, Vector2D _box_size)
 	animation_data.push_back(tmp[0]);
 
 	image = animation_data[0];
+	//image = NULL;
 
 	animation_count = 0;
 }
 
-void PLAYER::Update()
+void Player::Update()
 {
+	//__super::Update();
 	//移動処理
 	Movement();
 
@@ -46,7 +48,7 @@ void PLAYER::Update()
 	AnimationControl();
 }
 
-void PLAYER::Draw(Vector2D _camera_location) const
+void Player::Draw(Vector2D _camera_location) const
 {
 	//親クラスに書かれた描画処理の内容を実行する
 	__super::Draw(_camera_location);
@@ -54,12 +56,12 @@ void PLAYER::Draw(Vector2D _camera_location) const
 	DebugInfomation::Add("flg", jump_flag);
 }
 
-void PLAYER::Finalize()
+void Player::Finalize()
 {
 	animation_data.clear();
 }
 
-void PLAYER::Movement()
+void Player::Movement()
 {
 	//入力情報の取得
 	InputControl* input = InputControl::GetInstance();
@@ -110,7 +112,7 @@ void PLAYER::Movement()
 		//右矢印キーを押したら
 	case PlayerState::eRIGHT:
 		velocity.x += 0.25;
-		flip_flag = FALSE;      // 左向きフラグをセット
+		flip_flag = FALSE;      // 右向きフラグをセット
 
 		//左キーが離されたら
 		if (!input->GetKey(KEY_INPUT_RIGHT))player_state = PlayerState::eIDLE;
@@ -161,7 +163,7 @@ void PLAYER::Movement()
 }
 
 
-void PLAYER::AnimationControl()
+void Player::AnimationControl()
 {
 	//カウントの更新
 	animation_count++;
@@ -183,20 +185,26 @@ void PLAYER::AnimationControl()
 	}
 }
 
-void PLAYER::OnHitCollision(GameObject* hit_object)
+void Player::OnHitCollision(GameObject* hit_object)
+{
+	if (hit_object->GetObjectType() == eObjectType::ENEMY)
+	{
+		location.x = 0;
+	}
+
+
+}
+
+void Player::InvincibleState()
 {
 }
 
-void PLAYER::InvincibleState()
-{
-}
-
-PlayerState PLAYER::GetPlayerState()
+PlayerState Player::GetPlayerState()
 {
 	return PlayerState();
 }
 
-int PLAYER::GetPlayerHp()
+int Player::GetPlayerHp()
 {
 	return 0;
 }

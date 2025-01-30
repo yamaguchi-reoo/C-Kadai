@@ -2,9 +2,12 @@
 #include "../../Utility/InputControl.h"
 #include <DxLib.h>
 #include "../../Object/Character/Player/Player.h"
+#include "../../Object/Character/Enemy/EnemyRed.h"
 
 GameMainScene::GameMainScene()
 {
+	player = new Player();
+	enemy_r = new EnemyRed();
 }
 
 GameMainScene::~GameMainScene()
@@ -13,7 +16,8 @@ GameMainScene::~GameMainScene()
 
 void GameMainScene::Initialize()
 {
-	CreateObject<PLAYER>(Vector2D(32.0f,300.0f), Vector2D(32.0f));
+	CreateObject<Player>(Vector2D(32.0f,300.0f), Vector2D(32.0f));
+	CreateObject<EnemyRed>(Vector2D(500.0f,300.0f), Vector2D(64.0f));
 }
 
 eSceneType GameMainScene::Update()
@@ -29,6 +33,11 @@ eSceneType GameMainScene::Update()
 	{
 		return eSceneType::RESULT;
 	}
+
+	/*if (player->CheckBoxCollision(enemy_r))
+	{
+		player->OnHitCollision(enemy_r);
+	}*/
 
 	return __super::Update();
 }

@@ -1,11 +1,14 @@
 #pragma once
 #include "../SceneBase.h"
 #include "../../Object/Character/Player/Player.h"
+#include "../../Object/Character/Enemy/EnemyRed.h"
 
 class GameMainScene : 
 	public SceneBase
 {
 private:
+	Player* player;
+	EnemyRed* enemy_r;
 public:
 	GameMainScene();
 	~GameMainScene();

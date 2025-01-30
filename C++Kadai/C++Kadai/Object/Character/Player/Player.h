@@ -12,7 +12,7 @@ enum class PlayerState
     eDEAD
 };
 
-class PLAYER :
+class Player :
     public CharacterBase
 {
 private:
@@ -20,12 +20,12 @@ private:
     std::vector<int> animation_data;//アニメーションデータ
 
     int animation_count;    //アニメーションカウント
-    float g_velocity;       //重力加速度
+    //float g_velocity;       //重力加速度
     bool jump_flag;         //ジャンプフラグ
 
 public:
-    PLAYER();
-    ~PLAYER();
+    Player();
+    ~Player();
 
     //初期化処理
     void Initialize(Vector2D _location, Vector2D _box_size) override;

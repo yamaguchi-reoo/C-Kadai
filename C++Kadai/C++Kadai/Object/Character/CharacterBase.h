@@ -6,12 +6,10 @@ class CharacterBase :
 {
 protected:
     int hp = 0;
-    Vector2D velocity;
+	Vector2D velocity = { 0.0f };
+	float g_velocity = 0.0f;       //重力加速度
 
 public:
-	CharacterBase();
-	~CharacterBase();
-
 	//初期化処理
 	virtual void Initialize(Vector2D _location, Vector2D _box_size) override;
 	//更新処理

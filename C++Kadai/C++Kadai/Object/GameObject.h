@@ -44,9 +44,9 @@ public:
 
 	virtual void OnHitCollision(GameObject* hit_object);
 
-private:
+//private:
 	//当たり判定
-	void CheckBoxCollision(GameObject* obj);
+	bool CheckBoxCollision(GameObject* obj);
 
 };
 

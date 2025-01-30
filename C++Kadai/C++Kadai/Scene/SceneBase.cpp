@@ -1,6 +1,5 @@
 #include "SceneBase.h"
 
-
 SceneBase::SceneBase()
 {
 }
@@ -19,6 +18,19 @@ eSceneType SceneBase::Update()
 	for (GameObject* obj : objects)
 	{
 		obj->Update();
+	}
+
+	// 二重ループで衝突判定
+	for (int i = 0; i < objects.size(); i++)
+	{
+		for (int j = i + 1; j < objects.size(); j++) // j < objects.size() に修正
+		{
+			if (objects[i]->CheckBoxCollision(objects[j]))
+			{
+				objects[i]->OnHitCollision(objects[j]);
+				objects[j]->OnHitCollision(objects[i]);
+			}
+		}
 	}
 
 	return GetNowSceneType();
@@ -52,6 +64,8 @@ void SceneBase::Finalize()
 
 void SceneBase::DeleteObject(GameObject* obj)
 {
+	if (obj == nullptr) return; // 安全対策
+
 	auto it = std::find(objects.begin(), objects.end(), obj);
 
 	if (it != objects.end()) {
