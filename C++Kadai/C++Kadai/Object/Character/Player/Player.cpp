@@ -189,7 +189,18 @@ void Player::OnHitCollision(GameObject* hit_object)
 {
 	if (hit_object->GetObjectType() == eObjectType::ENEMY)
 	{
-		location.x = 0;
+		//ノックバック
+		//プレイヤーが右にいるなら右にノックバック
+		if (this->location.x > hit_object->GetLocation().x)
+		{
+			velocity.x += 10.0f;
+		}
+		//プレイヤーが左にいるなら左にノックバック
+		else
+		{
+			velocity.x -= 10.0f;
+		}
+		velocity.y -= 2.0f;
 	}
 
 
