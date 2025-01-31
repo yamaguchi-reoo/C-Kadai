@@ -16,7 +16,7 @@ GameMainScene::~GameMainScene()
 
 void GameMainScene::Initialize()
 {
-	CreateObject<Player>(Vector2D(32.0f,300.0f), Vector2D(32.0f));
+	CreateObject<Player>(Vector2D(32.0f,300.0f), Vector2D(64.0f));
 	CreateObject<EnemyRed>(Vector2D(500.0f,300.0f), Vector2D(64.0f));
 }
 
