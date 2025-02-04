@@ -4,6 +4,7 @@
 #include <iostream>
 #include <DxLib.h>
 
+
 void StageManager::SaveCSV(const std::string& file_name)
 {
 	std::ofstream file(file_name);
@@ -31,24 +32,36 @@ void StageManager::LoadCSV(const std::string& file_name)
 		return;
 	}
 
+	// ステージデータの幅と高さを読み込む
+	file >> stage_width_num;
+	file >> stage_height_num;
+
+	// ステージの幅と高さを設定
+	stage_width = stage_width_num * BOX_SIZE;
+	stage_height = stage_height_num * BOX_SIZE;
+
+	// ステージデータの配列を読み込む
+	for (int i = 0; i < stage_height_num; i++) {
+		for (int j = 0; j < stage_width_num; j++) {
+			file >> stage_data[i][j];  // 各ブロックの種類を読み込む
+		}
+	}
+
 	//既存のブロックデータをクリア
 	blocks.clear();
 	std::string line;
 
-	//1行ずつデータを読み込む
-	while (std::getline(file, line)) {
-		std::stringstream ss(line);
-		StageData block;
-		std::string item;
+	// CSVのファイルを1行ずつ読み込んで、各ブロックの座標と種類をStageDataに設定
+	for (int i = 0; i < stage_height_num; i++) {
+		for (int j = 0; j < stage_width_num; j++) {
+			StageData block;
+			block.x = j * BOX_SIZE;  // X座標を設定（ブロック幅で乗算）
+			block.y = i * BOX_SIZE; // Y座標を設定（ブロック高さで乗算）
+			block.type = static_cast<eObjectType>(stage_data[i][j]); // ステージデータの値をタイプに変換
 
-
-		//カンマ区切りでデータを取得し、各フィールドに格納
-		std::getline(ss, item, ','); block.x = std::stoi(item);
-		std::getline(ss, item, ','); block.y = std::stoi(item);
-		std::getline(ss, item, ','); block.type = static_cast<eObjectType>(std::stoi(item));
-
-		//ブロックリストに追加
-		blocks.push_back(block);
+			// blocksに追加
+			blocks.push_back(block);
+		}
 	}
 
 	file.close();

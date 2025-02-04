@@ -2,11 +2,11 @@
 #include "../Utility/Vector2D.h"
 enum eObjectType
 {
+	BLOCK,
 	PLAYER,
 	ENEMY,
 	ITEM,
 	GIMMICK,
-	BLOCK
 };
 
 class GameObject

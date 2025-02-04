@@ -4,12 +4,24 @@
 #include "../../Object/Character/Enemy/EnemyRed.h"
 #include "../../Object/Stage/StageManager.h"
 
+#define BOX_SIZE 32
+#define STAGE_MAX_WIDTH 500
+#define STAGE_MAX_HEIGHT 500
+
+
 class GameMainScene : 
 	public SceneBase
 {
 private:
 	//Player* player;
 	//EnemyRed* enemy_r;
+
+	int stage_width_num ;    //ステージの横のブロック数
+	int stage_height_num;   //ステージの縦のブロック数
+	int stage_width;        //ステージの横の大きさ
+	int stage_height;       //ステージの縦の大きさ
+
+	int stage_data[STAGE_MAX_WIDTH][STAGE_MAX_HEIGHT];
 
 	StageManager stage_manager;
 public:
@@ -24,6 +36,6 @@ public:
 	eSceneType GetNowSceneType()const override;
 
 	void LoadStage();
-	void SetStage(const StageData& block);
+	void SetStage();
 };
 

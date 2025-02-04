@@ -19,7 +19,7 @@ void Player::Initialize(Vector2D _location, Vector2D _box_size)
 {
 	__super::Initialize(_location, _box_size);
 
-	object_type = eObjectType::PLAYER;
+	object_type = PLAYER;
 	hp = 5;
 	velocity = { 0.0f };
 	g_velocity = 0.0f;

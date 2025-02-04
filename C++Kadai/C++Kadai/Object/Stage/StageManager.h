@@ -3,6 +3,10 @@
 #include <string>
 #include "../GameObject.h"
 
+#define BOX_SIZE 32
+#define STAGE_MAX_WIDTH 500
+#define STAGE_MAX_HEIGHT 500
+
 struct StageData{
 	int x, y;
 	eObjectType type;
@@ -11,6 +15,12 @@ struct StageData{
 class StageManager{
 private:
 	std::vector<StageData> blocks;
+	int stage_width_num;    //ステージの横のブロック数
+	int stage_height_num;   //ステージの縦のブロック数
+	int stage_width;        //ステージの横の大きさ
+	int stage_height;       //ステージの縦の大きさ
+
+	int stage_data[STAGE_MAX_WIDTH][STAGE_MAX_HEIGHT];
 
 public:
 	//ステージデータをCSVファイルに保存する

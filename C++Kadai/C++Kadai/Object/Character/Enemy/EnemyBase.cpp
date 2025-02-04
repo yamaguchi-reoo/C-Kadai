@@ -11,7 +11,7 @@ EnemyBase::~EnemyBase()
 void EnemyBase::Initialize(Vector2D _location, Vector2D _box_size)
 {
 	__super::Initialize(_location, _box_size);
-	object_type = eObjectType::ENEMY;
+	object_type = ENEMY;
 }
 
 void EnemyBase::Update()
