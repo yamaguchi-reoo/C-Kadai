@@ -2,13 +2,16 @@
 #include "../SceneBase.h"
 #include "../../Object/Character/Player/Player.h"
 #include "../../Object/Character/Enemy/EnemyRed.h"
+#include "../../Object/Stage/StageManager.h"
 
 class GameMainScene : 
 	public SceneBase
 {
 private:
-	Player* player;
-	EnemyRed* enemy_r;
+	//Player* player;
+	//EnemyRed* enemy_r;
+
+	StageManager stage_manager;
 public:
 	GameMainScene();
 	~GameMainScene();
@@ -19,5 +22,8 @@ public:
 	void Finalize() override;		//終了時処理
 
 	eSceneType GetNowSceneType()const override;
+
+	void LoadStage();
+	void SetStage(const StageData& block);
 };
 

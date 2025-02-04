@@ -133,6 +133,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Object\Stage\StageEditor.cpp" />
+    <ClCompile Include="Object\Stage\StageManager.cpp" />
     <ClCompile Include="Utility\FpsController.cpp" />
     <ClCompile Include="Utility\DebugInfomation.cpp" />
     <ClCompile Include="Object\Stage\Ground.cpp" />
@@ -159,6 +161,8 @@
     <ClCompile Include="Utility\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Object\Stage\StageEditor.h" />
+    <ClInclude Include="Object\Stage\StageManager.h" />
     <ClInclude Include="Utility\FpsController.h" />
     <ClInclude Include="Utility\DebugInfomation.h" />
     <ClInclude Include="Object\Stage\Ground.h" />
