@@ -4,10 +4,13 @@
 #include "../../../Utility/ResourceManager.h"
 #include "../../../Utility/UserTemplate.h"
 #include "../../../Utility/DebugInfomation.h"
+#include"../../../Object/Stage/Ground.h"
 
+#include <iostream>
+#include <algorithm>
 #define GRAVITY (9.087f)
 
-Player::Player() : player_state(PlayerState::eIDLE),animation_data(),animation_count()/*,g_velocity(0.0f)*/,jump_flag(false)
+Player::Player() : player_state(PlayerState::eIDLE),animation_data(),animation_count()/*,g_velocity(0.0f)*//*,jump_flag(false)*/
 {
 }
 
@@ -23,6 +26,7 @@ void Player::Initialize(Vector2D _location, Vector2D _box_size)
 	hp = 5;
 	velocity = { 0.0f };
 	g_velocity = 0.0f;
+	//jump_flag = false;
 
 	//アニメーション画像の読み込み
 	ResourceManager* rm = ResourceManager::GetInstance();
@@ -96,7 +100,7 @@ void Player::Movement()
 		//左矢印キーを押したら
 	case PlayerState::eLEFT:
 		velocity.x -= 0.25;
-		flip_flag = TRUE;      // 左向きフラグをセット
+		flip_flg = TRUE;      // 左向きフラグをセット
 
 		//左キーが離されたら
 		if (!input->GetKey(KEY_INPUT_LEFT))player_state = PlayerState::eIDLE;
@@ -112,7 +116,7 @@ void Player::Movement()
 		//右矢印キーを押したら
 	case PlayerState::eRIGHT:
 		velocity.x += 0.25;
-		flip_flag = FALSE;      // 右向きフラグをセット
+		flip_flg = FALSE;      // 右向きフラグをセット
 
 		//左キーが離されたら
 		if (!input->GetKey(KEY_INPUT_RIGHT))player_state = PlayerState::eIDLE;
@@ -149,14 +153,14 @@ void Player::Movement()
 	velocity.y += g_velocity;// 重力を加算
 	location.y += velocity.y;
 
-	//!!!地面との当たり判定ができ次第削除!!!!
-	if (location.y >= 400.0f)
-	{
-		location.y = 400.0f;
-		velocity.y = 0.0f;
-		g_velocity = 0.0f;
-		jump_flag = false;
-	}
+	////!!!地面との当たり判定ができ次第削除!!!!
+	//if (location.y >= 400.0f)
+	//{
+	//	location.y = 400.0f;
+	//	velocity.y = 0.0f;
+	//	g_velocity = 0.0f;
+	//	jump_flag = false;
+	//}
 
 	// 位置を更新
 	location += velocity;
@@ -187,7 +191,9 @@ void Player::AnimationControl()
 
 void Player::OnHitCollision(GameObject* hit_object)
 {
-	if (hit_object->GetObjectType() == eObjectType::ENEMY)
+	__super::OnHitCollision(hit_object);
+
+	if (hit_object->GetObjectType() == ENEMY)
 	{
 		//ノックバック
 		//プレイヤーが右にいるなら右にノックバック
@@ -202,8 +208,6 @@ void Player::OnHitCollision(GameObject* hit_object)
 		}
 		velocity.y -= 2.0f;
 	}
-
-
 }
 
 void Player::InvincibleState()

@@ -21,7 +21,7 @@ private:
 
     int animation_count;    //アニメーションカウント
     //float g_velocity;       //重力加速度
-    bool jump_flag;         //ジャンプフラグ
+    //bool jump_flag;         //ジャンプフラグ
 
 public:
     Player();

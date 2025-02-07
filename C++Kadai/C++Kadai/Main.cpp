@@ -5,11 +5,16 @@
 #include "Utility/ResourceManager.h"
 #include "Scene/SceneManager.h"
 
+#define SCREEN_WIDTH 640 //画面の幅
+#define SCREEN_HEIGHT 480 //画面の幅
+
 #define FRAMERATE 60.0 //フレームレート
 
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
 	SetUseCharCodeFormat(DX_CHARCODEFORMAT_UTF8);
+
+	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32); // ウインドウのサイズ
 
 	ChangeWindowMode(TRUE);
 

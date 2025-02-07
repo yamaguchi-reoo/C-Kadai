@@ -4,9 +4,8 @@
 #include "../../Object/Character/Enemy/EnemyRed.h"
 #include "../../Object/Stage/StageManager.h"
 
-#define BOX_SIZE 32
-#define STAGE_MAX_WIDTH 500
-#define STAGE_MAX_HEIGHT 500
+#define STAGE_MAX_WIDTH 700
+#define STAGE_MAX_HEIGHT 700
 
 
 class GameMainScene : 
@@ -21,7 +20,7 @@ private:
 	int stage_width;        //ステージの横の大きさ
 	int stage_height;       //ステージの縦の大きさ
 
-	int stage_data[STAGE_MAX_WIDTH][STAGE_MAX_HEIGHT];
+	int stage_data[STAGE_MAX_HEIGHT][STAGE_MAX_WIDTH];
 
 	StageManager stage_manager;
 public:

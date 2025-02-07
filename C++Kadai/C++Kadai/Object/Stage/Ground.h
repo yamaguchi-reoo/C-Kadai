@@ -1,5 +1,8 @@
 #pragma once
 #include "../GameObject.h"
+
+#define BOX_SIZE 32
+
 class Ground :
     public GameObject
 {

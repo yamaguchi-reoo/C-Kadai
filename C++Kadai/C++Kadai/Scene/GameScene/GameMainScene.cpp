@@ -22,6 +22,7 @@ void GameMainScene::Initialize()
 	//CreateObject<EnemyRed>(Vector2D(500.0f,300.0f), Vector2D(64.0f));
 
 	LoadStage();
+	//SetStage();
 }
 
 eSceneType GameMainScene::Update()
@@ -51,6 +52,15 @@ void GameMainScene::Draw() const
 		DrawBox(block.x, block.y, block.x + 32, block.y + 32, GetColor(255, 255, 255), TRUE);
 	}*/
 
+	for (int i = 0; i < stage_height_num; i++) {
+		for (int j = 0; j < stage_width_num; j++) {
+			std::cout << stage_data[i][j] << " ";
+			DrawFormatString(j * 32,i * 32, GetColor(255, 255, 255), "%d", stage_data[i][j]);
+			//DrawFormatString(0, 30, GetColor(255, 255, 255), "幅 %d  高さ %d", stage_width_num, stage_height_num);
+		}
+		
+	}
+
 }
 
 void GameMainScene::Finalize()
@@ -72,6 +82,7 @@ void GameMainScene::LoadStage()
 	//}
 
 	std::ifstream file("Resource/file/stage.csv");
+	//std::ifstream file("Resource/file/stage.csv");
 
 	if (!file) {
 		std::cerr << "ファイルを開けませんでした: " << std::endl;
@@ -91,10 +102,19 @@ void GameMainScene::LoadStage()
 		stage_height_num = std::stoi(height); // ステージ高さ
 	}
 
-	// ステージデータの読み込み（CSVの2行目以降）
+	//ステージデータの読み込み（CSVの2行目以降）
 	for (int i = 0; i < stage_height_num; i++) {
-		for (int j = 0; j < stage_width_num; j++) {
-			file >> stage_data[i][j];  // 各ブロックの種類を読み込む
+		//1行ずつ読み込む
+		if (std::getline(file, line)) {
+			std::stringstream ss(line);
+			for (int j = 0; j < stage_width_num; j++) {
+				//カンマ区切りでデータを取得
+				std::string value;
+				if (std::getline(ss, value, ',')) {
+					//文字列を整数に変換してステージデータに格納
+					stage_data[i][j] = std::stoi(value);
+				}
+			}
 		}
 	}
 
@@ -105,10 +125,13 @@ void GameMainScene::LoadStage()
 
 void GameMainScene::SetStage()
 {
+
 	for (int i = 0; i < stage_height_num; i++) {
 		for (int j = 0; j < stage_width_num; j++) {
 			switch (stage_data[i][j])
 			{
+			case 0:
+				break;
 			case BLOCK:
 				CreateObject<Ground>(Vector2D(j * BOX_SIZE, i * BOX_SIZE), Vector2D(32.0f));
 				break;

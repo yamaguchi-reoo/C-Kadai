@@ -2,7 +2,7 @@
 #include "../Utility/Vector2D.h"
 enum eObjectType
 {
-	BLOCK,
+	BLOCK = 1,
 	PLAYER,
 	ENEMY,
 	ITEM,
@@ -15,7 +15,10 @@ protected:
 	Vector2D location;	//オブジェクトの位置
 	Vector2D box_size;	//オブジェクトのサイズ
 	int image;			//描画する画像データ
-	int flip_flag;		//描画する反転フラグ
+	int flip_flg;		//描画する反転フラグ
+
+	bool stage_hit_flg[2][4];		//objectとステージの当たり判定
+	float move[4] = { 0,0,0,0 };	//objectが当たり判定に被らないようにする時の各方向の移動量
 
 	eObjectType object_type;
 

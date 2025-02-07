@@ -1,4 +1,6 @@
 #include "CharacterBase.h"
+#include <iostream>
+#include <algorithm>
 #define GRAVITY (9.087f)
 
 void CharacterBase::Initialize(Vector2D _location, Vector2D _box_size)
@@ -43,4 +45,46 @@ void CharacterBase::OnDamaged(int _damage)
 
 void CharacterBase::OnHitCollision(GameObject* hit_object)
 {
+	//if (hit_object->GetObjectType() == BLOCK)
+	{
+		// プレイヤーとオブジェクトのAABB情報を取得
+		Vector2D playerMin = location;
+		Vector2D playerMax = location + box_size;
+
+		Vector2D objectMin = hit_object->GetLocation();
+		Vector2D objectMax = objectMin + hit_object->GetBoxSize();
+
+		// AABB衝突判定
+		if (playerMax.x > objectMin.x && playerMin.x < objectMax.x &&
+			playerMax.y > objectMin.y && playerMin.y < objectMax.y)
+		{
+			Vector2D pushBack(0, 0);
+
+			// 衝突深度を計算
+			float depthX = std::min(playerMax.x - objectMin.x, objectMax.x - playerMin.x);
+			float depthY = std::min(playerMax.y - objectMin.y, objectMax.y - playerMin.y);
+
+			// 一番浅い方向に押し戻す
+			if (depthX < depthY)
+			{
+				if (playerMin.x < objectMin.x) pushBack.x = -depthX;	//左側から衝突
+				else  pushBack.x = depthX;	//右側から衝突
+
+				velocity.x = 0.0f;
+			}
+			else
+			{
+				if (playerMin.y < objectMin.y) {
+					pushBack.y = -depthY; //上から衝突
+					jump_flag = false;
+				}
+				else  pushBack.y = depthY;	//下から衝突
+				velocity.y = 0.0f;
+				g_velocity = 0.0f;
+			}
+			// 位置を修正
+			location += pushBack;
+		}
+
+	}
 }

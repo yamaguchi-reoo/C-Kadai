@@ -9,6 +9,8 @@ protected:
 	Vector2D velocity = { 0.0f };
 	float g_velocity = 0.0f;       //重力加速度
 
+	bool jump_flag = false;        //ジャンプフラグ
+
 public:
 	//初期化処理
 	virtual void Initialize(Vector2D _location, Vector2D _box_size) override;
