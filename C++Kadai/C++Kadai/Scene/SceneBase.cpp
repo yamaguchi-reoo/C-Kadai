@@ -1,4 +1,5 @@
 #include "SceneBase.h"
+#include "../common.h"
 
 SceneBase::SceneBase()
 {
@@ -33,6 +34,32 @@ eSceneType SceneBase::Update()
 		}
 	}
 
+	// プレイヤーの取得
+	GameObject* player = nullptr;
+	for (auto obj : objects)
+	{
+		if (obj->GetObjectType() == PLAYER)
+		{
+			player = obj;
+			break;
+		}
+	}
+	// プレイヤーが存在するならカメラを追従させる
+	if (player)
+	{
+		float screen_half_width = SCREEN_WIDTH / 2;				// 画面の半分の幅
+		float stage_limit_left = 0.0f;							// ステージの左端
+		float stage_limit_right = 40 * BOX_SIZE - SCREEN_WIDTH; // ステージの右端 
+
+		// プレイヤーの位置 - 画面の半分の幅 ＝ カメラ位置
+		camera_location.x = player->GetLocation().x - screen_half_width;
+
+		// 画面端ではスクロールしないよう制限
+		if (camera_location.x < stage_limit_left) camera_location.x = stage_limit_left;
+		if (camera_location.x > stage_limit_right) camera_location.x = stage_limit_right;
+	}
+
+
 	return GetNowSceneType();
 }
 
@@ -40,7 +67,8 @@ void SceneBase::Draw() const
 {
 	for (GameObject* obj : objects)
 	{
-		obj->Draw(camera_location);
+		Vector2D draw_location = obj->GetLocation() - camera_location;
+		obj->Draw(draw_location);
 	}
 }
 
@@ -64,7 +92,7 @@ void SceneBase::Finalize()
 
 void SceneBase::DeleteObject(GameObject* obj)
 {
-	if (obj == nullptr) return; // 安全対策
+	if (obj == nullptr) return;
 
 	auto it = std::find(objects.begin(), objects.end(), obj);
 

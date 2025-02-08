@@ -26,14 +26,14 @@ void GameObject::Update()
 {
 }
 
-void GameObject::Draw(Vector2D _camera_location) const
+void GameObject::Draw(Vector2D offset) const
 {
 	//メンバの情報を基に画像を描画する
-	DrawRotaGraphF(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 1.0, 0.0, image, TRUE, flip_flg);
-	//Vector2D lower_right = location + (box_size / 2.0f);
+	//DrawRotaGraphF(location.x + (box_size.x / 2), location.y + (box_size.y / 2), 1.0, 0.0, image, TRUE, flip_flg);
+	DrawRotaGraphF(offset.x + (box_size.x / 2), offset.y + (box_size.y / 2), 1.0, 0.0, image, TRUE, flip_flg);
 
 	//DrawBoxAA(upper_left.x, upper_left.y, lower_right.x, lower_right.y, GetColor(255, 0, 0), FALSE);
-	DrawBoxAA(location.x, location.y, location.x + box_size.x, location.y + box_size.y, GetColor(255, 0, 0), FALSE);
+	DrawBoxAA(offset.x, offset.y, offset.x + box_size.x, offset.y + box_size.y, GetColor(255, 0, 0), FALSE);
 }
 
 void GameObject::Finalize()

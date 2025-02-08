@@ -31,7 +31,7 @@ public:
 	//更新処理
 	virtual void Update();			
 	//描画処理
-	virtual void Draw(Vector2D _camera_location) const;
+	virtual void Draw(Vector2D offset) const;
 	//終了時処理
 	virtual void Finalize();
 

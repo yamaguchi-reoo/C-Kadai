@@ -21,17 +21,12 @@ void EnemyRed::Update()
 {
 	__super::Update();
 
-	//!!!地面との当たり判定ができ次第削除!!!!
-	if (location.y >= 400.0f)
-	{
-		location.y = 400.0f;
-	}
 }
 
-void EnemyRed::Draw(Vector2D _camera_location) const
+void EnemyRed::Draw(Vector2D offset) const
 {
 	//親クラスに書かれた描画処理の内容を実行する
-	__super::Draw(_camera_location);
+	__super::Draw(offset);
 
 }
 

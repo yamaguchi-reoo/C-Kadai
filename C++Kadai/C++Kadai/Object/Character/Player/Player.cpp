@@ -52,12 +52,14 @@ void Player::Update()
 	AnimationControl();
 }
 
-void Player::Draw(Vector2D _camera_location) const
+void Player::Draw(Vector2D offset) const
 {
 	//親クラスに書かれた描画処理の内容を実行する
-	__super::Draw(_camera_location);
+	__super::Draw(offset);
 
 	DebugInfomation::Add("flg", jump_flag);
+	DebugInfomation::Add("camera", offset.x);
+
 }
 
 void Player::Finalize()

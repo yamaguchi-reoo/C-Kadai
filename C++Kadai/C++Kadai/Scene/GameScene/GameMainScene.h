@@ -17,8 +17,6 @@ private:
 
 	int stage_width_num ;    //ステージの横のブロック数
 	int stage_height_num;   //ステージの縦のブロック数
-	int stage_width;        //ステージの横の大きさ
-	int stage_height;       //ステージの縦の大きさ
 
 	int stage_data[STAGE_MAX_HEIGHT][STAGE_MAX_WIDTH];
 

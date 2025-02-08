@@ -12,9 +12,9 @@ void Ground::Update()
 {
 }
 
-void Ground::Draw(Vector2D _camera_location) const
+void Ground::Draw(Vector2D offset) const
 {
-	__super::Draw(_camera_location);
+	__super::Draw(offset);
 }
 
 void Ground::Finalize()

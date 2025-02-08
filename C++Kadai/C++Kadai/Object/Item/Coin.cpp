@@ -16,7 +16,7 @@ void Coin::Update()
 {
 }
 
-void Coin::Draw(Vector2D _camera_location) const
+void Coin::Draw(Vector2D offset) const
 {
 }
 

@@ -15,7 +15,7 @@ public:
     //更新処理
     void Update()override;
     //描画処理
-    void Draw(Vector2D _camera_location) const override;
+    void Draw(Vector2D offset) const override;
     //終了時処理
     void Finalize()override;
 };

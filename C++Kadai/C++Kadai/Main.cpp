@@ -4,9 +4,7 @@
 #include "Utility/InputControl.h"
 #include "Utility/ResourceManager.h"
 #include "Scene/SceneManager.h"
-
-#define SCREEN_WIDTH 640 //画面の幅
-#define SCREEN_HEIGHT 480 //画面の幅
+#include "common.h"
 
 #define FRAMERATE 60.0 //フレームレート
 

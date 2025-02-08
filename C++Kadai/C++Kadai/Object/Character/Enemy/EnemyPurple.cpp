@@ -16,7 +16,7 @@ void EnemyPurple::Update()
 {
 }
 
-void EnemyPurple::Draw(Vector2D _camera_location) const
+void EnemyPurple::Draw(Vector2D offset) const
 {
 }
 

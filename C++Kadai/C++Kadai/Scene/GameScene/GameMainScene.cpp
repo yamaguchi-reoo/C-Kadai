@@ -8,7 +8,7 @@
 #include "../../Object/Character/Enemy/EnemyRed.h"
 #include "../../Object/Stage/Ground.h"
 
-GameMainScene::GameMainScene():stage_width_num(0), stage_height_num(0), stage_width(0), stage_height(0), stage_data{ 0 }
+GameMainScene::GameMainScene():stage_width_num(0), stage_height_num(0), stage_data{ 0 }
 {
 }
 
@@ -47,11 +47,7 @@ void GameMainScene::Draw() const
 	__super::Draw();
 	DrawFormatString(10, 10, GetColor(255, 255, 255), "メイン画面");
 
-	/*for (const auto& block : stage_manager.GetBlock())
-	{
-		DrawBox(block.x, block.y, block.x + 32, block.y + 32, GetColor(255, 255, 255), TRUE);
-	}*/
-
+	//ステージデータの描画
 	for (int i = 0; i < stage_height_num; i++) {
 		for (int j = 0; j < stage_width_num; j++) {
 			std::cout << stage_data[i][j] << " ";
@@ -74,15 +70,7 @@ eSceneType GameMainScene::GetNowSceneType() const
 
 void GameMainScene::LoadStage()
 {
-	//stage_manager.LoadCSV("Resource/file/stage.csv");
-
-	//// ここで読み込んだブロックデータを元にオブジェクト生成
-	//for (const auto& data : stage_manager.GetBlock()) {
-	//	SetStage(data);
-	//}
-
 	std::ifstream file("Resource/file/stage.csv");
-	//std::ifstream file("Resource/file/stage.csv");
 
 	if (!file) {
 		std::cerr << "ファイルを開けませんでした: " << std::endl;
@@ -90,7 +78,10 @@ void GameMainScene::LoadStage()
 	}
 	// 1行目を読み込んでステージ幅と高さを取得
 	std::string line;
+
+	//fileから1行読み込んで、line に格納。
 	if (std::getline(file, line)) {
+		//文字列を解析するためのストリームを作成。
 		std::stringstream ss(line);
 		std::string width, height;
 
@@ -98,6 +89,7 @@ void GameMainScene::LoadStage()
 		std::getline(ss, width, ',');
 		std::getline(ss, height, ',');
 
+		//文字列を整数に変換
 		stage_width_num = std::stoi(width);   // ステージ幅
 		stage_height_num = std::stoi(height); // ステージ高さ
 	}

@@ -16,7 +16,7 @@ void GimmickBase::Update()
 {
 }
 
-void GimmickBase::Draw(Vector2D _camera_location) const
+void GimmickBase::Draw(Vector2D offset) const
 {
 }
 

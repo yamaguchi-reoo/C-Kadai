@@ -16,7 +16,7 @@ void EnergyDrink::Update()
 {
 }
 
-void EnergyDrink::Draw(Vector2D _camera_location) const
+void EnergyDrink::Draw(Vector2D offset) const
 {
 }
 
