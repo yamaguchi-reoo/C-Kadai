@@ -39,4 +39,5 @@ void EnemyBase::AnimationControl()
 
 void EnemyBase::OnHitCollision(GameObject* hit_object)
 {
+	__super::OnHitCollision(hit_object);
 }

@@ -45,45 +45,59 @@ void CharacterBase::OnDamaged(int _damage)
 
 void CharacterBase::OnHitCollision(GameObject* hit_object)
 {
-	//if (hit_object->GetObjectType() == BLOCK)
+	//当たったオブジェクトがブロックだった場合の処理
+	if (hit_object->GetObjectType() == BLOCK)
 	{
-		// プレイヤーとオブジェクトのAABB情報を取得
-		Vector2D playerMin = location;
-		Vector2D playerMax = location + box_size;
+		//プレイヤーとオブジェクトの情報を取得
+		Vector2D obj_location = location;
+		Vector2D obj_size = location + box_size;
 
-		Vector2D objectMin = hit_object->GetLocation();
-		Vector2D objectMax = objectMin + hit_object->GetBoxSize();
+		Vector2D target_location = hit_object->GetLocation();
+		Vector2D target_size = target_location + hit_object->GetBoxSize();
 
-		// AABB衝突判定
-		if (playerMax.x > objectMin.x && playerMin.x < objectMax.x &&
-			playerMax.y > objectMin.y && playerMin.y < objectMax.y)
+		//AABB衝突判定
+		if (obj_size.x > target_location.x && obj_location.x < target_size.x &&
+			obj_size.y > target_location.y && obj_location.y < target_size.y)
 		{
-			Vector2D pushBack(0, 0);
+			//押し戻し用のベクトル
+			Vector2D push{ 0.0f, 0.0f };
 
-			// 衝突深度を計算
-			float depthX = std::min(playerMax.x - objectMin.x, objectMax.x - playerMin.x);
-			float depthY = std::min(playerMax.y - objectMin.y, objectMax.y - playerMin.y);
+			//めり込みの計算
+			float depth_x = std::min(obj_size.x - target_location.x, target_size.x - obj_location.x);
+			float depth_y = std::min(obj_size.y - target_location.y, target_size.y - obj_location.y);
 
-			// 一番浅い方向に押し戻す
-			if (depthX < depthY)
+
+			//衝突の深さ（めり込み量）を計算
+			if (depth_x< depth_y)
 			{
-				if (playerMin.x < objectMin.x) pushBack.x = -depthX;	//左側から衝突
-				else  pushBack.x = depthX;	//右側から衝突
-
+				// 横方向の衝突処理
+				if (obj_location.x < target_location.x)
+				{
+					push.x = -depth_x;	//左側から衝突
+				}
+				else
+				{
+					push.x = depth_x;	//右側から衝突
+				}
 				velocity.x = 0.0f;
 			}
 			else
 			{
-				if (playerMin.y < objectMin.y) {
-					pushBack.y = -depthY; //上から衝突
-					jump_flag = false;
+				//縦方向の衝突処理
+				if (obj_location.y < target_location.y) 
+				{
+					push.y = -depth_y; //上から衝突
+					jump_flag = false;	  //ジャンプフラグをfalseにする
 				}
-				else  pushBack.y = depthY;	//下から衝突
+				else
+				{
+					push.y = depth_y;	//下から衝突
+				}
 				velocity.y = 0.0f;
 				g_velocity = 0.0f;
 			}
 			// 位置を修正
-			location += pushBack;
+			location += push;
 		}
 
 	}
