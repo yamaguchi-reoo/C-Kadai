@@ -10,6 +10,7 @@
 
 GameMainScene::GameMainScene():stage_width_num(0), stage_height_num(0), stage_data{ 0 }
 {
+
 }
 
 GameMainScene::~GameMainScene()
@@ -18,11 +19,8 @@ GameMainScene::~GameMainScene()
 
 void GameMainScene::Initialize()
 {
-	//CreateObject<Player>(Vector2D(32.0f,300.0f), Vector2D(64.0f));
-	//CreateObject<EnemyRed>(Vector2D(500.0f,300.0f), Vector2D(64.0f));
 
 	LoadStage();
-	//SetStage();
 }
 
 eSceneType GameMainScene::Update()
@@ -38,6 +36,8 @@ eSceneType GameMainScene::Update()
 	{
 		return eSceneType::RESULT;
 	}
+
+	UpdateCamera();
 
 	return __super::Update();
 }
@@ -137,5 +137,34 @@ void GameMainScene::SetStage()
 				break;
 			}
 		}
+	}
+}
+
+void GameMainScene::UpdateCamera()
+{
+	//プレイヤーの取得
+	GameObject* player = nullptr;
+	for (auto obj : objects)
+	{
+		if (obj->GetObjectType() == PLAYER)
+		{
+			player = obj;
+			break;
+		}
+	}
+
+	//プレイヤーが存在するならカメラを追従させる
+	if (player)
+	{
+		float screen_half_width = SCREEN_WIDTH / 2;				//画面の半分の幅
+		float stage_limit_left = 0.0f;							//ステージの左端
+		float stage_limit_right = stage_width_num * BOX_SIZE - SCREEN_WIDTH; //ステージの右端 
+
+		//プレイヤーの位置 - 画面の半分の幅 ＝ カメラ位置
+		camera_location.x = player->GetLocation().x - screen_half_width;
+
+		//画面端ではスクロールしないよう制限
+		if (camera_location.x < stage_limit_left) camera_location.x = stage_limit_left;
+		if (camera_location.x > stage_limit_right) camera_location.x = stage_limit_right;
 	}
 }

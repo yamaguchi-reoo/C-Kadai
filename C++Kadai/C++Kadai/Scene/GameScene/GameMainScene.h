@@ -8,14 +8,14 @@
 #define STAGE_MAX_HEIGHT 700
 
 
-class GameMainScene : 
+class GameMainScene :
 	public SceneBase
 {
 private:
 	//Player* player;
 	//EnemyRed* enemy_r;
 
-	int stage_width_num ;    //ステージの横のブロック数
+	int stage_width_num;    //ステージの横のブロック数
 	int stage_height_num;   //ステージの縦のブロック数
 
 	int stage_data[STAGE_MAX_HEIGHT][STAGE_MAX_WIDTH];
@@ -32,7 +32,12 @@ public:
 
 	eSceneType GetNowSceneType()const override;
 
+	//ステージデータを読み込む
 	void LoadStage();
+
+	//ステージデータを生成
 	void SetStage();
+
+	void UpdateCamera();
 };
 
