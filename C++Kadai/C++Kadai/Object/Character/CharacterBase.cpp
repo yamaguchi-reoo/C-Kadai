@@ -15,14 +15,6 @@ void CharacterBase::Update()
 	velocity.y += g_velocity;// 重力を加算
 	location.y += velocity.y;
 
-
-	////!!!地面との当たり判定ができ次第削除!!!!
-	//if (location.y >= 400.0f)
-	//{
-	//	location.y = 400.0f;
-	//	velocity.y = 0.0f;
-	//	g_velocity = 0.0f;
-	//}
 }
 
 void CharacterBase::Draw(Vector2D _camera_location) const
