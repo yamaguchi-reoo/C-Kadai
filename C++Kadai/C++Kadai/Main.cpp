@@ -12,7 +12,13 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 {
 	SetUseCharCodeFormat(DX_CHARCODEFORMAT_UTF8);
 
+#ifdef _RELEASE
 	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32); // ウインドウのサイズ
+#endif
+
+#ifdef _DEBUG
+	SetGraphMode(DEBUG_SCREEN_WIDTH, DEBUG_SCREEN_HEIGHT, 32); // ウインドウのサイズ
+#endif
 
 	ChangeWindowMode(TRUE);
 

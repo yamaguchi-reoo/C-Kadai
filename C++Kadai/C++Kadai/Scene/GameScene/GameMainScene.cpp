@@ -8,7 +8,7 @@
 #include "../../Object/Character/Enemy/EnemyRed.h"
 #include "../../Object/Stage/Ground.h"
 
-GameMainScene::GameMainScene():stage_width_num(0), stage_height_num(0), stage_data{ 0 }
+GameMainScene::GameMainScene() :stage_width_num(0), stage_height_num(0), stage_data{ 0 }, draw_data_flg(false)
 {
 
 }
@@ -19,7 +19,6 @@ GameMainScene::~GameMainScene()
 
 void GameMainScene::Initialize()
 {
-
 	LoadStage();
 }
 
@@ -36,6 +35,10 @@ eSceneType GameMainScene::Update()
 	{
 		return eSceneType::RESULT;
 	}
+	if (input->GetKeyDown(KEY_INPUT_X))
+	{
+		draw_data_flg = !draw_data_flg;
+	}
 
 	UpdateCamera();
 
@@ -45,17 +48,27 @@ eSceneType GameMainScene::Update()
 void GameMainScene::Draw() const
 {
 	__super::Draw();
-	DrawFormatString(10, 10, GetColor(255, 255, 255), "メイン画面");
+	//DrawFormatString(10, 10, GetColor(255, 255, 255), "メイン画面");
 
+#ifdef _DEBUG
 	//ステージデータの描画
-	for (int i = 0; i < stage_height_num; i++) {
-		for (int j = 0; j < stage_width_num; j++) {
-			std::cout << stage_data[i][j] << " ";
-			DrawFormatString(j * 32,i * 32, GetColor(255, 255, 255), "%d", stage_data[i][j]);
-			//DrawFormatString(0, 30, GetColor(255, 255, 255), "幅 %d  高さ %d", stage_width_num, stage_height_num);
+	if (!draw_data_flg) {
+		for (int i = 0; i < stage_height_num; i++) {
+			for (int j = 0; j < stage_width_num; j++) {
+
+				int draw_x = j * 32 - static_cast<int>(camera_location.x);
+				int draw_y = i * 32 - static_cast<int>(camera_location.y);
+
+				// 画面内にあるデータだけ描画する
+				if (draw_x + BOX_SIZE >= 0 && draw_x < SCREEN_WIDTH)
+				{
+					DrawFormatString(draw_x, draw_y, GetColor(255, 255, 255), "%d", stage_data[i][j]);
+				}
+			}
+
 		}
-		
 	}
+#endif
 
 }
 
@@ -160,7 +173,7 @@ void GameMainScene::UpdateCamera()
 		float stage_limit_left = 0.0f;							//ステージの左端
 		float stage_limit_right = stage_width_num * BOX_SIZE - SCREEN_WIDTH; //ステージの右端 
 
-		//プレイヤーの位置 - 画面の半分の幅 ＝ カメラ位置
+		//カメラ位置 ＝ プレイヤーの位置 - 画面の半分の幅 
 		camera_location.x = player->GetLocation().x - screen_half_width;
 
 		//画面端ではスクロールしないよう制限

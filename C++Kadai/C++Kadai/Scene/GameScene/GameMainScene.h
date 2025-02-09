@@ -20,6 +20,8 @@ private:
 
 	int stage_data[STAGE_MAX_HEIGHT][STAGE_MAX_WIDTH];
 
+	bool draw_data_flg;		//ステージデータの描画フラグ
+
 	StageManager stage_manager;
 public:
 	GameMainScene();

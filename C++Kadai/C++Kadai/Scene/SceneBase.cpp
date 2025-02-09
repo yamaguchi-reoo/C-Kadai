@@ -24,7 +24,7 @@ eSceneType SceneBase::Update()
 	// 二重ループで衝突判定
 	for (int i = 0; i < objects.size(); i++)
 	{
-		for (int j = i + 1; j < objects.size(); j++) // j < objects.size() に修正
+		for (int j = i + 1; j < objects.size(); j++)
 		{
 			if (objects[i]->CheckBoxCollision(objects[j]))
 			{
@@ -33,6 +33,7 @@ eSceneType SceneBase::Update()
 			}
 		}
 	}
+
 	return GetNowSceneType();
 }
 

@@ -57,6 +57,19 @@ void Player::Draw(Vector2D offset) const
 	//親クラスに書かれた描画処理の内容を実行する
 	__super::Draw(offset);
 
+	//一時的にフォントサイズを変更する
+	int oldFontSize = GetFontSize();
+
+	//残機描画
+	SetFontSize(28);
+	DrawFormatString(62, 20, GetColor(255, 255, 255), "x %d", hp);
+	//メンバの情報を基に画像を描画する
+	DrawRotaGraphF(35,32, 0.5, 0.0, image, TRUE, FALSE);
+
+	//元のフォントサイズに戻す
+	SetFontSize(oldFontSize);
+
+
 	DebugInfomation::Add("flg", jump_flag);
 	DebugInfomation::Add("camera", offset.x);
 
