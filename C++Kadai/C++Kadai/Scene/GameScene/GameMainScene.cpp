@@ -10,7 +10,6 @@
 
 GameMainScene::GameMainScene() :stage_width_num(0), stage_height_num(0), stage_data{ 0 }, draw_data_flg(false)
 {
-
 }
 
 GameMainScene::~GameMainScene()
@@ -35,6 +34,7 @@ eSceneType GameMainScene::Update()
 	{
 		return eSceneType::RESULT;
 	}
+	//Xキーでデバッグ情報の表示を切り替える
 	if (input->GetKeyDown(KEY_INPUT_X))
 	{
 		draw_data_flg = !draw_data_flg;
