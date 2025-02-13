@@ -13,8 +13,7 @@ void EnemyRed::Initialize(Vector2D _location, Vector2D _box_size)
 	__super::Initialize(_location, _box_size);
 
 	hp = 5;
-	velocity = { 0.0f };
-	g_velocity = 0.0f;
+	object_type = ENEMY_RED;
 
 	//アニメーション画像の読み込み
 	ResourceManager* rm = ResourceManager::GetInstance();
@@ -25,7 +24,6 @@ void EnemyRed::Initialize(Vector2D _location, Vector2D _box_size)
 	animation_data.push_back(tmp[0]);
 
 	image = animation_data[0];
-	//image = NULL;
 
 	animation_count = 0;
 }

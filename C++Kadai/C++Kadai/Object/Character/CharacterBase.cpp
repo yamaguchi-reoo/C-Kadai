@@ -2,7 +2,6 @@
 #include <iostream>
 #include <algorithm>
 
-
 #define GRAVITY (9.087f)
 
 void CharacterBase::Initialize(Vector2D _location, Vector2D _box_size)
@@ -76,8 +75,8 @@ void CharacterBase::OnHitCollision(GameObject* hit_object)
 			Vector2D push{ 0.0f, 0.0f };
 
 			//めり込みの計算
-			float depth_x = std::min(obj_size.x - target_location.x, target_size.x - obj_location.x);
-			float depth_y = std::min(obj_size.y - target_location.y, target_size.y - obj_location.y);
+			float depth_x = Min<float>(obj_size.x - target_location.x, target_size.x - obj_location.x);
+			float depth_y = Min<float>(obj_size.y - target_location.y, target_size.y - obj_location.y);
 
 
 			//衝突の深さ（めり込み量）を計算

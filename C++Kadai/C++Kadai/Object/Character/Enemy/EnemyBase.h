@@ -6,7 +6,8 @@
 enum class eEnemyState
 {
     eIDLE,
-    eMOVE,
+    eLEFT,
+    eRIGHT,
     eATTACK,
     eDEAD
 };
@@ -17,6 +18,8 @@ class EnemyBase :
 protected:
     eEnemyState enemy_state;
     std::vector<int> animation_data;
+
+	bool on_ground_flg = false;
 
 public:
     EnemyBase();

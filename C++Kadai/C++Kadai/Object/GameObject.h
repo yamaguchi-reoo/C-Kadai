@@ -4,7 +4,8 @@ enum eObjectType
 {
 	BLOCK = 1,
 	PLAYER,
-	ENEMY,
+	ENEMY_RED,
+	ENEMY_PURPLE,
 	ITEM,
 	GIMMICK,
 };

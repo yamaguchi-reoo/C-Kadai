@@ -18,7 +18,9 @@ eSceneType SceneBase::Update()
 {
 	for (GameObject* obj : objects)
 	{
-		obj->Update();
+		//if (camera_location.x + obj->GetBoxSize().x && camera_location.x <= 800) {
+			obj->Update();
+		//}
 	}
 
 	// 二重ループで衝突判定

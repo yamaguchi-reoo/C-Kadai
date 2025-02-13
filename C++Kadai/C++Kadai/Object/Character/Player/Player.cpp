@@ -164,11 +164,6 @@ void Player::Movement()
 	float max_speed = 5.0f;  // 最大速度
 	velocity.x = Min<float>(Max<float>(velocity.x, -max_speed), max_speed);
 
-	////重力加速度
-	//g_velocity += GRAVITY / 444.0f;
-	//velocity.y += g_velocity;// 重力を加算
-	//location.y += velocity.y;
-
 	// 位置を更新
 	location += velocity;
 }
@@ -200,7 +195,7 @@ void Player::OnHitCollision(GameObject* hit_object)
 {
 	__super::OnHitCollision(hit_object);
 
-	if (hit_object->GetObjectType() == ENEMY)
+	if (hit_object->GetObjectType() == ENEMY_RED || hit_object->GetObjectType() == ENEMY_PURPLE)
 	{
 		//ノックバック
 		//プレイヤーが右にいるなら右にノックバック

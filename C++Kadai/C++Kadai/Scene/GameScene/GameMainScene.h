@@ -1,12 +1,7 @@
 #pragma once
 #include "../SceneBase.h"
-#include "../../Object/Character/Player/Player.h"
-#include "../../Object/Character/Enemy/EnemyRed.h"
 #include "../../Object/Stage/StageManager.h"
-
-#define STAGE_MAX_WIDTH 700
-#define STAGE_MAX_HEIGHT 700
-
+#include "../../common.h"
 
 class GameMainScene :
 	public SceneBase

@@ -161,6 +161,7 @@
     <ClCompile Include="Utility\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Object\ObjectList.h" />
     <ClInclude Include="Object\Stage\StageEditor.h" />
     <ClInclude Include="Object\Stage\StageManager.h" />
     <ClInclude Include="common.h" />

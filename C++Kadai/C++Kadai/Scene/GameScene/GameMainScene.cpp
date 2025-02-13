@@ -4,9 +4,9 @@
 #include <iostream>
 #include "../../Utility/InputControl.h"
 #include <DxLib.h>
-#include "../../Object/Character/Player/Player.h"
-#include "../../Object/Character/Enemy/EnemyRed.h"
-#include "../../Object/Stage/Ground.h"
+
+#include "../../Object/ObjectList.h"
+
 
 GameMainScene::GameMainScene() :stage_width_num(0), stage_height_num(0), stage_data{ 0 }, draw_data_flg(false)
 {
@@ -143,8 +143,11 @@ void GameMainScene::SetStage()
 			case PLAYER:
 				CreateObject<Player>(Vector2D(j * BOX_SIZE, i * BOX_SIZE), Vector2D(64.0f));
 				break;
-			case ENEMY:
+			case ENEMY_RED:
 				CreateObject<EnemyRed>(Vector2D(j * BOX_SIZE, i * BOX_SIZE), Vector2D(64.0f));
+				break;
+			case ENEMY_PURPLE:
+				CreateObject<EnemyPurple>(Vector2D(j * BOX_SIZE, i * BOX_SIZE), Vector2D(64.0f));
 				break;
 			default:
 				break;
