@@ -16,7 +16,7 @@ void EnemyPurple::Update()
 {
 }
 
-void EnemyPurple::Draw(Vector2D offset) const
+void EnemyPurple::Draw(Vector2D offset, double rate) const
 {
 }
 

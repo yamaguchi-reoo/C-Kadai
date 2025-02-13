@@ -10,7 +10,7 @@
 #include <algorithm>
 #define GRAVITY (9.087f)
 
-Player::Player() : player_state(PlayerState::eIDLE),animation_data(),animation_count()/*,g_velocity(0.0f)*//*,jump_flag(false)*/
+Player::Player() : player_state(PlayerState::eIDLE),animation_data()/*,animation_count()*//*,g_velocity(0.0f)*//*,jump_flag(false)*/
 {
 }
 
@@ -44,7 +44,7 @@ void Player::Initialize(Vector2D _location, Vector2D _box_size)
 
 void Player::Update()
 {
-	//__super::Update();
+	__super::Update();
 	//移動処理
 	Movement();
 
@@ -52,10 +52,10 @@ void Player::Update()
 	AnimationControl();
 }
 
-void Player::Draw(Vector2D offset) const
+void Player::Draw(Vector2D offset, double rate) const
 {
 	//親クラスに書かれた描画処理の内容を実行する
-	__super::Draw(offset);
+	__super::Draw(offset, 1.0);
 
 	//一時的にフォントサイズを変更する
 	int oldFontSize = GetFontSize();
@@ -72,6 +72,7 @@ void Player::Draw(Vector2D offset) const
 
 	DebugInfomation::Add("flg", jump_flag);
 	DebugInfomation::Add("camera", offset.x);
+	DebugInfomation::Add("damage_flg", damage_flg);
 
 }
 
@@ -163,19 +164,10 @@ void Player::Movement()
 	float max_speed = 5.0f;  // 最大速度
 	velocity.x = Min<float>(Max<float>(velocity.x, -max_speed), max_speed);
 
-	//重力加速度
-	g_velocity += GRAVITY / 444.0f;
-	velocity.y += g_velocity;// 重力を加算
-	location.y += velocity.y;
-
-	////!!!地面との当たり判定ができ次第削除!!!!
-	//if (location.y >= 400.0f)
-	//{
-	//	location.y = 400.0f;
-	//	velocity.y = 0.0f;
-	//	g_velocity = 0.0f;
-	//	jump_flag = false;
-	//}
+	////重力加速度
+	//g_velocity += GRAVITY / 444.0f;
+	//velocity.y += g_velocity;// 重力を加算
+	//location.y += velocity.y;
 
 	// 位置を更新
 	location += velocity;
@@ -220,6 +212,11 @@ void Player::OnHitCollision(GameObject* hit_object)
 		else
 		{
 			velocity.x -= 10.0f;
+		}
+
+		if (!damage_flg)
+		{
+			__super::ApplyDamage(1);
 		}
 		velocity.y -= 2.0f;
 	}

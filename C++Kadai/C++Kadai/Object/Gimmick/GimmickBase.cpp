@@ -16,7 +16,7 @@ void GimmickBase::Update()
 {
 }
 
-void GimmickBase::Draw(Vector2D offset) const
+void GimmickBase::Draw(Vector2D offset, double rate) const
 {
 }
 

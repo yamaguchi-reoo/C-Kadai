@@ -16,7 +16,7 @@ void GaolFlag::Update()
 {
 }
 
-void GaolFlag::Draw(Vector2D offset) const
+void GaolFlag::Draw(Vector2D offset, double rate) const
 {
 }
 

@@ -42,7 +42,7 @@ void SceneBase::Draw() const
 	for (GameObject* obj : objects)
 	{
 		Vector2D draw_location = obj->GetLocation() - camera_location;
-		obj->Draw(draw_location);
+		obj->Draw(draw_location, 1.0);
 	}
 }
 

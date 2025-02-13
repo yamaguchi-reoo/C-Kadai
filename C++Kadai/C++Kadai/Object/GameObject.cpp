@@ -26,13 +26,13 @@ void GameObject::Update()
 {
 }
 
-void GameObject::Draw(Vector2D offset) const
+void GameObject::Draw(Vector2D offset, double rate) const
 {
 	// 描画範囲の判定
 	if (offset.x + box_size.x >= 0 && offset.x < SCREEN_WIDTH) 
 	{
 		//メンバの情報を基に画像を描画する
-		DrawRotaGraphF(offset.x + (box_size.x / 2), offset.y + (box_size.y / 2), 1.0, 0.0, image, TRUE, flip_flg);
+		DrawRotaGraphF(offset.x + (box_size.x / 2), offset.y + (box_size.y / 2), rate, 0.0, image, TRUE, flip_flg);
 		// デバッグ用の当たり判定ボックス描画
 		DrawBoxAA(offset.x, offset.y, offset.x + box_size.x, offset.y + box_size.y, GetColor(255, 0, 0), FALSE);
 	}
@@ -87,15 +87,5 @@ bool GameObject::CheckBoxCollision(GameObject* obj)
 	//当たり判定の演算
 	return (fabsf(diff.x) <= my_size.x + sub_size.x &&
 			fabsf(diff.y) <= my_size.y + sub_size.y);
-
-
-	/*Vector2D upper_left1 = location - (box_size / 2.0f);
-	Vector2D lower_right1 = location + (box_size / 2.0f);
-
-	Vector2D upper_left2 = obj->GetLocation() - (obj->GetBoxSize() / 2.0f);
-	Vector2D lower_right2 = obj->GetLocation() + (obj->GetBoxSize() / 2.0f);
-
-	return (upper_left1.x < lower_right2.x && lower_right1.x > upper_left2.x &&
-			upper_left1.y < lower_right2.y && lower_right1.y > upper_left2.y);*/
 
 }

@@ -12,9 +12,9 @@ void Ground::Update()
 {
 }
 
-void Ground::Draw(Vector2D offset) const
+void Ground::Draw(Vector2D offset, double rate) const
 {
-	__super::Draw(offset);
+	__super::Draw(offset, 1.0);
 }
 
 void Ground::Finalize()

@@ -16,7 +16,7 @@ void EnergyDrink::Update()
 {
 }
 
-void EnergyDrink::Draw(Vector2D offset) const
+void EnergyDrink::Draw(Vector2D offset, double rate) const
 {
 }
 

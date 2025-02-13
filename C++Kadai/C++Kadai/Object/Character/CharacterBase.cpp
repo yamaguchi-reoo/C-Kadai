@@ -1,6 +1,8 @@
 #include "CharacterBase.h"
 #include <iostream>
 #include <algorithm>
+
+
 #define GRAVITY (9.087f)
 
 void CharacterBase::Initialize(Vector2D _location, Vector2D _box_size)
@@ -15,12 +17,18 @@ void CharacterBase::Update()
 	velocity.y += g_velocity;// 重力を加算
 	location.y += velocity.y;
 
+	if (damage_flg)
+	{
+		count++;
+		OnDamaged(1);	
+	}
 }
 
-void CharacterBase::Draw(Vector2D _camera_location) const
+void CharacterBase::Draw(Vector2D offset, double rate) const
 {
 	//親クラスに書かれた描画処理の内容を実行する
-	__super::Draw(_camera_location);
+	__super::Draw(offset, rate);
+
 }
 
 void CharacterBase::Finalize()
@@ -29,10 +37,23 @@ void CharacterBase::Finalize()
 
 void CharacterBase::ApplyDamage(int _damage)
 {
+	this->damage_flg = true;
+	hp -= _damage;
+
+	if (hp <= 0)
+	{
+		hp = 5;//死亡処理
+	}
 }
 
 void CharacterBase::OnDamaged(int _damage)
 {
+	//ダメージを受けた際の処理
+	if (count >= 60)
+	{
+		damage_flg = false;
+		count = 0;
+	}
 }
 
 void CharacterBase::OnHitCollision(GameObject* hit_object)

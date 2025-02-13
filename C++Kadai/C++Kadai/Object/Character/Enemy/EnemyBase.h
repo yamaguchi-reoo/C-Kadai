@@ -1,6 +1,7 @@
 #pragma once
 #include "../CharacterBase.h"
 #include <vector>
+#include "../../../Utility/ResourceManager.h"
 
 enum class eEnemyState
 {
@@ -26,7 +27,7 @@ public:
     //更新処理
     virtual void Update()override;
     //描画処理
-    virtual void Draw(Vector2D offset) const override;
+    virtual void Draw(Vector2D offset, double rate) const override;
     //終了時処理
     virtual void Finalize()override;
 

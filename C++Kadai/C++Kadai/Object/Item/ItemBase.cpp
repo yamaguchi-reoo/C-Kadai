@@ -16,7 +16,7 @@ void ItemBase::Update()
 {
 }
 
-void ItemBase::Draw(Vector2D offset) const
+void ItemBase::Draw(Vector2D offset, double rate) const
 {
 }
 

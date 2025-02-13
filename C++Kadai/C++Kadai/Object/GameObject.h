@@ -20,7 +20,8 @@ protected:
 	bool stage_hit_flg[2][4];		//objectとステージの当たり判定
 	float move[4] = { 0,0,0,0 };	//objectが当たり判定に被らないようにする時の各方向の移動量
 
-	eObjectType object_type;
+	eObjectType object_type;		//オブジェクトの種類
+
 
 public:
 	GameObject();
@@ -31,7 +32,7 @@ public:
 	//更新処理
 	virtual void Update();			
 	//描画処理
-	virtual void Draw(Vector2D offset) const;
+	virtual void Draw(Vector2D offset, double rate) const;
 	//終了時処理
 	virtual void Finalize();
 

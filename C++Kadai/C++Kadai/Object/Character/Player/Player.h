@@ -19,7 +19,7 @@ private:
     PlayerState player_state;       //プレイヤーの状態
     std::vector<int> animation_data;//アニメーションデータ
 
-    int animation_count;    //アニメーションカウント
+    //int animation_count;    //アニメーションカウント
     //float g_velocity;       //重力加速度
     //bool jump_flag;         //ジャンプフラグ
 
@@ -32,7 +32,7 @@ public:
     //更新処理
     void Update()override;
     //描画処理
-    void Draw(Vector2D _camera_location) const override;
+    void Draw(Vector2D offset, double rate) const override;
     //終了時処理
     void Finalize()override;
 
