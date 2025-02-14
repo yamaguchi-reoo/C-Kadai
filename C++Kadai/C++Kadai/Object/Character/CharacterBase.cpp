@@ -48,7 +48,7 @@ void CharacterBase::ApplyDamage(int _damage)
 void CharacterBase::OnDamaged(int _damage)
 {
 	//ダメージを受けた際の処理
-	if (count >= 60)
+	if (count >= 120)
 	{
 		damage_flg = false;
 		count = 0;

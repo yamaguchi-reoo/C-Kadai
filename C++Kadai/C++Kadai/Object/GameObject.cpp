@@ -47,6 +47,7 @@ void GameObject::Finalize()
 
 void GameObject::SetLocation(Vector2D _location)
 {
+	this->location = _location;
 }
 
 Vector2D GameObject::GetLocation() const
@@ -58,6 +59,12 @@ Vector2D GameObject::GetBoxSize() const
 {
 	return this->box_size;
 }
+
+Vector2D GameObject::GetVelocity() const
+{
+	return this->velocity;
+}
+
 
 eObjectType GameObject::GetObjectType()
 {

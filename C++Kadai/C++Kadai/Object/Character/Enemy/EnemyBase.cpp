@@ -99,8 +99,9 @@ void EnemyBase::OnHitCollision(GameObject* hit_object)
 {
 	//__super::OnHitCollision(hit_object);
 
-		//当たったオブジェクトがプレイヤーだった場合の処理
+	//当たったオブジェクトがプレイヤーだった場合
 	if (hit_object->GetObjectType() == PLAYER) {
+		//真正面でぶつかったら反対方向に進むように
 		float player_x = hit_object->GetLocation().x;
 
 		// プレイヤーが敵の右側にいる場合

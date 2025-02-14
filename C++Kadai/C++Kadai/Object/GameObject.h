@@ -15,6 +15,7 @@ class GameObject
 protected:
 	Vector2D location;	//オブジェクトの位置
 	Vector2D box_size;	//オブジェクトのサイズ
+	Vector2D velocity = { 0.0f };
 	int image;			//描画する画像データ
 	int flip_flg;		//描画する反転フラグ
 
@@ -40,11 +41,17 @@ public:
 public:
 	//座標を設定
 	void SetLocation(Vector2D _location);
+
 	//座標を取得
 	Vector2D GetLocation()const;
+
 	//ボックスサイズを取得
 	Vector2D GetBoxSize()const;
+	
+	//速度取得
+	Vector2D GetVelocity()const;
 
+	//オブジェクトタイプ取得	
 	eObjectType GetObjectType();
 
 	virtual void OnHitCollision(GameObject* hit_object);

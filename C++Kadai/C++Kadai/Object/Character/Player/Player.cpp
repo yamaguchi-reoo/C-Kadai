@@ -45,8 +45,10 @@ void Player::Initialize(Vector2D _location, Vector2D _box_size)
 void Player::Update()
 {
 	__super::Update();
+
 	//移動処理
 	Movement();
+
 
 	//アニメーション管理
 	AnimationControl();
@@ -54,8 +56,19 @@ void Player::Update()
 
 void Player::Draw(Vector2D offset, double rate) const
 {
-	//親クラスに書かれた描画処理の内容を実行する
-	__super::Draw(offset, 1.0);
+	//ダメージを受けたら点滅するように
+	if (damage_flg) {
+		if (count % 5 == 0) {
+			//親クラスに書かれた描画処理の内容を実行する
+			__super::Draw(offset, 1.0);
+		}
+	}
+	else
+	{
+		//親クラスに書かれた描画処理の内容を実行する
+		__super::Draw(offset, 1.0);
+	}
+	
 
 	//一時的にフォントサイズを変更する
 	int oldFontSize = GetFontSize();
@@ -73,6 +86,7 @@ void Player::Draw(Vector2D offset, double rate) const
 	DebugInfomation::Add("flg", jump_flag);
 	DebugInfomation::Add("camera", offset.x);
 	DebugInfomation::Add("damage_flg", damage_flg);
+	DebugInfomation::Add("velo", velocity.x);
 
 }
 
@@ -94,11 +108,11 @@ void Player::Movement()
 		// 待機状態（キーが押されていないときの減速処理）
 		if (velocity.x < -1e-6f) // 左向きの速度を減らす
 		{
-			velocity.x = Min<float>(velocity.x + 0.1f, 0.0f); // 徐々に0に近づける
+			velocity.x = Min<float>(velocity.x + 0.15f, 0.0f); // 徐々に0に近づける
 		}
 		else if (velocity.x > 1e-6f) // 右向きの速度を減らす
 		{
-			velocity.x = Max<float>(velocity.x - 0.1f, 0.0f); // 徐々に0に近づける
+			velocity.x = Max<float>(velocity.x - 0.15f, 0.0f); // 徐々に0に近づける
 		}
 
 		//左右移動
@@ -160,11 +174,11 @@ void Player::Movement()
 		break;
 	}
 
-	// 最大速度を制限
+	//最大速度を制限
 	float max_speed = 5.0f;  // 最大速度
 	velocity.x = Min<float>(Max<float>(velocity.x, -max_speed), max_speed);
 
-	// 位置を更新
+	//位置を更新
 	location += velocity;
 }
 
@@ -177,7 +191,7 @@ void Player::AnimationControl()
 	//
 	if (animation_count >= 10)
 	{
-		////カウントを0クリアする
+		//カウントを0クリアする
 		animation_count = 0;
 		//画像の切替を行う
 		if (image == animation_data[0])
@@ -188,7 +202,10 @@ void Player::AnimationControl()
 		{
 			image = animation_data[0];
 		}
+		
+		
 	}
+
 }
 
 void Player::OnHitCollision(GameObject* hit_object)
@@ -197,23 +214,37 @@ void Player::OnHitCollision(GameObject* hit_object)
 
 	if (hit_object->GetObjectType() == ENEMY_RED || hit_object->GetObjectType() == ENEMY_PURPLE)
 	{
+		//ダメージ受けて一定時間は無敵に
+		if (damage_flg)
+		{
+			return;
+		}
+
+		float enemy_velocity = hit_object->GetVelocity().x;
 		//ノックバック
 		//プレイヤーが右にいるなら右にノックバック
 		if (this->location.x > hit_object->GetLocation().x)
 		{
-			velocity.x += 10.0f;
+			// 敵が左に移動中なら、プレイヤーは右にノックバック
+			if (enemy_velocity < 0.0f)
+			{
+				velocity.x = 5.0f;  // ノックバックの力を右に設定
+			}
+			velocity.x = 5.0f;
 		}
 		//プレイヤーが左にいるなら左にノックバック
-		else
+		else if(this->location.x < hit_object->GetLocation().x)
 		{
-			velocity.x -= 10.0f;
+			//velocity.x -= 5.0f;
+			// 敵が右に移動中なら、プレイヤーは左にノックバック
+			if (enemy_velocity > 0.0f)
+			{
+				velocity.x = -5.0f;  // ノックバックの力を左に設定
+			}
+			velocity.x = -5.0f;
 		}
 
-		if (!damage_flg)
-		{
-			__super::ApplyDamage(1);
-		}
-		velocity.y -= 2.0f;
+		__super::ApplyDamage(1);
 	}
 }
 

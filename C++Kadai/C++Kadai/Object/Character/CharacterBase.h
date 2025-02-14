@@ -8,7 +8,6 @@ class CharacterBase :
 {
 protected:
     int hp = 0;
-	Vector2D velocity = { 0.0f };
 	float g_velocity = 0.0f;       //重力加速度
 
 	bool jump_flag = false;        //ジャンプフラグ
