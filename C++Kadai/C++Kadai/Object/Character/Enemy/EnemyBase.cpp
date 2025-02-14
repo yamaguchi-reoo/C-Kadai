@@ -1,4 +1,5 @@
 #include "EnemyBase.h"
+#include "../Player/Player.h"
 #include <DxLib.h>
 
 EnemyBase::EnemyBase():enemy_state(eEnemyState::eIDLE), animation_data()
@@ -100,7 +101,7 @@ void EnemyBase::OnHitCollision(GameObject* hit_object)
 	//__super::OnHitCollision(hit_object);
 
 	//当たったオブジェクトがプレイヤーだった場合
-	if (hit_object->GetObjectType() == PLAYER) {
+	if (hit_object->GetObjectType() == PLAYER)  {
 		//真正面でぶつかったら反対方向に進むように
 		float player_x = hit_object->GetLocation().x;
 

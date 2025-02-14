@@ -6,7 +6,8 @@ enum eObjectType
 	PLAYER,
 	ENEMY_RED,
 	ENEMY_PURPLE,
-	ITEM,
+	ITEM_COIN,
+	ITEM_DRINK,
 	GIMMICK,
 };
 

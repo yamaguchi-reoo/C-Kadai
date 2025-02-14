@@ -32,5 +32,7 @@ public:
 	virtual void OnDamaged(int _damege);
 
 	virtual void OnHitCollision(GameObject* hit_object)override;
+
+	bool GetDamageFlg()const;
 };
 

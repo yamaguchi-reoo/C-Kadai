@@ -114,3 +114,8 @@ void CharacterBase::OnHitCollision(GameObject* hit_object)
 
 	}
 }
+
+bool CharacterBase::GetDamageFlg()const
+{
+	return this->damage_flg;
+}

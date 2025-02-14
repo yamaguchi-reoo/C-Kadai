@@ -149,6 +149,12 @@ void GameMainScene::SetStage()
 			case ENEMY_PURPLE:
 				CreateObject<EnemyPurple>(Vector2D(j * BOX_SIZE, i * BOX_SIZE), Vector2D(64.0f));
 				break;
+			case ITEM_COIN:
+				CreateObject<Coin>(Vector2D(j * BOX_SIZE, i * BOX_SIZE), Vector2D(32.0f));
+				break;
+			case ITEM_DRINK:
+				CreateObject<EnergyDrink>(Vector2D(j * BOX_SIZE, i * BOX_SIZE), Vector2D(32.0f, 64.0f));
+				break;
 			default:
 				break;
 			}

@@ -4,7 +4,7 @@ class ItemBase :
     public GameObject
 {
 protected:
-    int score;
+    int score = 0;;
 public:
     //コンストラクタ
     ItemBase();
