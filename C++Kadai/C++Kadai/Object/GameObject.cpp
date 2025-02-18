@@ -2,8 +2,9 @@
 #include "GameObject.h"
 #include <math.h>
 #include "../common.h"
+#include "../Scene/SceneBase.h"
 
-GameObject::GameObject() : location(), box_size(), image(NULL), object_type(), flip_flg(FALSE), move(), stage_hit_flg()
+GameObject::GameObject() : location(), box_size(), image(NULL), object_type(), flip_flg(FALSE), move(), stage_hit_flg(),delete_flg()
 {
 }
 
@@ -17,6 +18,8 @@ void GameObject::Initialize(Vector2D _location, Vector2D _box_size)
 	location = _location;
 	//サイズを設定
 	box_size = _box_size;
+
+	delete_flg = false;
 
 	//画像を設定
 	//image = NULL;
@@ -43,6 +46,7 @@ void GameObject::Draw(Vector2D offset, double rate) const
 
 void GameObject::Finalize()
 {
+
 }
 
 void GameObject::SetLocation(Vector2D _location)

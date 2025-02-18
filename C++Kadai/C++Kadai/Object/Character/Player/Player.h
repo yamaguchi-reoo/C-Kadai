@@ -19,6 +19,9 @@ private:
     PlayerState player_state;       //プレイヤーの状態
     std::vector<int> animation_data;//アニメーションデータ
 
+    bool invincible_flg;            //無敵用フラグ
+    int invincible_time;            //無敵時間
+
     //int animation_count;    //アニメーションカウント
     //float g_velocity;       //重力加速度
     //bool jump_flag;         //ジャンプフラグ

@@ -36,6 +36,22 @@ eSceneType SceneBase::Update()
 		}
 	}
 
+	//削除フラグが立っているオブジェクトを削除
+	for (auto it = objects.begin(); it != objects.end();)
+	{
+		if ((*it)->GetDeleteFlg()) {
+			//削除処理
+			DeleteObject(*it);
+			//削除フラグが立っているオブジェクトを削除
+			it = objects.begin();
+		}
+		else
+		{
+			++it;
+		}
+
+	}
+
 	return GetNowSceneType();
 }
 

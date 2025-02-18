@@ -43,4 +43,5 @@ void EnemyRed::Draw(Vector2D offset, double rate) const
 
 void EnemyRed::Finalize()
 {
+	__super::Finalize();
 }

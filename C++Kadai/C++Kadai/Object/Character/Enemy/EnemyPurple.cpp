@@ -30,4 +30,5 @@ void EnemyPurple::Draw(Vector2D offset, double rate) const
 
 void EnemyPurple::Finalize()
 {
+	__super::Finalize();
 }

@@ -38,6 +38,7 @@ void EnemyBase::Draw(Vector2D offset, double rate) const
 
 void EnemyBase::Finalize()
 {
+	__super::Finalize();
 }
 
 void EnemyBase::Movement()

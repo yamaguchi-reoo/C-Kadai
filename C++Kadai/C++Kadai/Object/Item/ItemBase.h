@@ -19,5 +19,7 @@ public:
     virtual void Draw(Vector2D offset, double rate) const override;
     //終了時処理
     virtual void Finalize()override;
+
+    virtual void OnHitCollision(GameObject* hit_object);
 };
 

@@ -8,9 +8,10 @@
 
 #include <iostream>
 #include <algorithm>
-#define GRAVITY (9.087f)
 
-Player::Player() : player_state(PlayerState::eIDLE),animation_data()/*,animation_count()*//*,g_velocity(0.0f)*//*,jump_flag(false)*/
+#define MAX_INVINCIBLE_TIME 300
+
+Player::Player() : player_state(PlayerState::eIDLE),animation_data(), invincible_flg(),invincible_time()
 {
 }
 
@@ -27,6 +28,9 @@ void Player::Initialize(Vector2D _location, Vector2D _box_size)
 	velocity = { 0.0f };
 	g_velocity = 0.0f;
 	//jump_flag = false;
+	invincible_flg = false;
+	invincible_time = 0;
+
 
 	//アニメーション画像の読み込み
 	ResourceManager* rm = ResourceManager::GetInstance();
@@ -49,9 +53,19 @@ void Player::Update()
 	//移動処理
 	Movement();
 
-
 	//アニメーション管理
 	AnimationControl();
+
+	//無敵時間
+	if (invincible_flg)
+	{
+		invincible_time++;
+		if (invincible_time >= MAX_INVINCIBLE_TIME)
+		{
+			invincible_flg = false;
+			invincible_time = 0;
+		}
+	}
 }
 
 void Player::Draw(Vector2D offset, double rate) const
@@ -63,12 +77,20 @@ void Player::Draw(Vector2D offset, double rate) const
 			__super::Draw(offset, 1.0);
 		}
 	}
+	//無敵時間中はあり得んくらいチカチカさせる
+	else if (invincible_flg)
+	{
+		if (invincible_time % 2 == 0)
+		{
+			//親クラスに書かれた描画処理の内容を実行する
+			__super::Draw(offset, 1.0);
+		}
+	}
 	else
 	{
 		//親クラスに書かれた描画処理の内容を実行する
 		__super::Draw(offset, 1.0);
 	}
-	
 
 	//一時的にフォントサイズを変更する
 	int oldFontSize = GetFontSize();
@@ -87,11 +109,14 @@ void Player::Draw(Vector2D offset, double rate) const
 	DebugInfomation::Add("camera", offset.x);
 	DebugInfomation::Add("damage_flg", damage_flg);
 	DebugInfomation::Add("velo", velocity.x);
+	DebugInfomation::Add("invincible_flg", invincible_flg);
+	DebugInfomation::Add("invincible_time", invincible_time);
 
 }
 
 void Player::Finalize()
 {
+	__super::Finalize();
 	animation_data.clear();
 }
 
@@ -202,10 +227,7 @@ void Player::AnimationControl()
 		{
 			image = animation_data[0];
 		}
-		
-		
 	}
-
 }
 
 void Player::OnHitCollision(GameObject* hit_object)
@@ -235,7 +257,6 @@ void Player::OnHitCollision(GameObject* hit_object)
 		//プレイヤーが左にいるなら左にノックバック
 		else if(this->location.x < hit_object->GetLocation().x)
 		{
-			//velocity.x -= 5.0f;
 			// 敵が右に移動中なら、プレイヤーは左にノックバック
 			if (enemy_velocity > 0.0f)
 			{
@@ -246,10 +267,16 @@ void Player::OnHitCollision(GameObject* hit_object)
 
 		__super::ApplyDamage(1);
 	}
+
+	if (hit_object->GetObjectType() == ITEM_DRINK)
+	{
+		InvincibleState();
+	}
 }
 
 void Player::InvincibleState()
 {
+	invincible_flg = true;
 }
 
 PlayerState Player::GetPlayerState()

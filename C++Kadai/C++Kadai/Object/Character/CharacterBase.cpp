@@ -1,6 +1,7 @@
 #include "CharacterBase.h"
 #include <iostream>
 #include <algorithm>
+#include "../../common.h"
 
 #define GRAVITY (9.087f)
 
@@ -16,6 +17,13 @@ void CharacterBase::Update()
 	velocity.y += g_velocity;// 重力を加算
 	location.y += velocity.y;
 
+	//座標が画面より下になったら削除
+	if (SCREEN_HEIGHT + 80 <= this->location.y)
+	{
+		this->SetDeleteFlg();
+	}
+
+	//ダメージを受けた際の処理
 	if (damage_flg)
 	{
 		count++;
@@ -32,6 +40,7 @@ void CharacterBase::Draw(Vector2D offset, double rate) const
 
 void CharacterBase::Finalize()
 {
+	__super::Finalize();
 }
 
 void CharacterBase::ApplyDamage(int _damage)
@@ -47,7 +56,6 @@ void CharacterBase::ApplyDamage(int _damage)
 
 void CharacterBase::OnDamaged(int _damage)
 {
-	//ダメージを受けた際の処理
 	if (count >= 120)
 	{
 		damage_flg = false;

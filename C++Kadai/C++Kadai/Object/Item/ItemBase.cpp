@@ -26,4 +26,14 @@ void ItemBase::Draw(Vector2D offset, double rate) const
 
 void ItemBase::Finalize()
 {
+	__super::Finalize();
+}
+
+void ItemBase::OnHitCollision(GameObject* hit_object)
+{
+	//ƒvƒŒƒCƒ„[‚É“–‚½‚Á‚½‚çíœ
+	if (hit_object->GetObjectType() == PLAYER)
+	{
+		this->SetDeleteFlg();
+	}
 }

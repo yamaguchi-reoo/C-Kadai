@@ -1,5 +1,7 @@
 #pragma once
 #include "../Utility/Vector2D.h"
+
+
 enum eObjectType
 {
 	BLOCK = 1,
@@ -18,7 +20,8 @@ protected:
 	Vector2D box_size;	//オブジェクトのサイズ
 	Vector2D velocity = { 0.0f };
 	int image;			//描画する画像データ
-	int flip_flg;		//描画する反転フラグ
+	bool flip_flg;		//描画する反転フラグ
+	bool delete_flg;
 
 	bool stage_hit_flg[2][4];		//objectとステージの当たり判定
 	float move[4] = { 0,0,0,0 };	//objectが当たり判定に被らないようにする時の各方向の移動量
@@ -60,6 +63,10 @@ public:
 //private:
 	//当たり判定
 	bool CheckBoxCollision(GameObject* obj);
+
+	//死亡フラグ
+	void SetDeleteFlg() { delete_flg = true; }
+	bool GetDeleteFlg() { return delete_flg; }
 
 };
 
