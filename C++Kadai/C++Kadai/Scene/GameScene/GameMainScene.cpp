@@ -8,7 +8,7 @@
 #include "../../Object/ObjectList.h"
 
 
-GameMainScene::GameMainScene() :stage_width_num(0), stage_height_num(0), stage_data{ 0 }, draw_data_flg(false)
+GameMainScene::GameMainScene() :stage_width_num(0), stage_height_num(0), stage_data{ 0 }, draw_data_flg(false),score()
 {
 }
 
@@ -18,7 +18,10 @@ GameMainScene::~GameMainScene()
 
 void GameMainScene::Initialize()
 {
+	//ステージ読み込み
 	LoadStage();
+
+	score = 0;
 }
 
 eSceneType GameMainScene::Update()
@@ -42,13 +45,23 @@ eSceneType GameMainScene::Update()
 
 	UpdateCamera();
 
+	//score++;
+
 	return __super::Update();
 }
 
 void GameMainScene::Draw() const
 {
 	__super::Draw();
-	//DrawFormatString(10, 10, GetColor(255, 255, 255), "メイン画面");
+
+	//一時的にフォントサイズを変更する
+	int oldFontSize = GetFontSize();
+	//残機描画
+	SetFontSize(28);
+	DrawFormatString(540, 10, GetColor(255, 255, 255), "%d", score);
+	//元のフォントサイズに戻す
+	SetFontSize(oldFontSize);
+
 
 #ifdef _DEBUG
 	//ステージデータの描画
@@ -56,8 +69,8 @@ void GameMainScene::Draw() const
 		for (int i = 0; i < stage_height_num; i++) {
 			for (int j = 0; j < stage_width_num; j++) {
 
-				int draw_x = j * 32 - static_cast<int>(camera_location.x);
-				int draw_y = i * 32 - static_cast<int>(camera_location.y);
+				int draw_x = j * BOX_SIZE - static_cast<int>(camera_location.x);
+				int draw_y = i * BOX_SIZE - static_cast<int>(camera_location.y);
 
 				// 画面内にあるデータだけ描画する
 				if (draw_x + BOX_SIZE >= 0 && draw_x < SCREEN_WIDTH)
@@ -155,6 +168,9 @@ void GameMainScene::SetStage()
 			case ITEM_DRINK:
 				CreateObject<EnergyDrink>(Vector2D(j * BOX_SIZE, i * BOX_SIZE), Vector2D(32.0f, 64.0f));
 				break;
+			case GIMMICK:
+				CreateObject<GoalFlag>(Vector2D(j * BOX_SIZE, i * BOX_SIZE), Vector2D(32.0f, 48.0f));
+				break;
 			default:
 				break;
 			}
@@ -189,4 +205,9 @@ void GameMainScene::UpdateCamera()
 		if (camera_location.x < stage_limit_left) camera_location.x = stage_limit_left;
 		if (camera_location.x > stage_limit_right) camera_location.x = stage_limit_right;
 	}
+}
+
+void GameMainScene::AddScore(int _score)
+{
+	score += _score;
 }

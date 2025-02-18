@@ -1,10 +1,11 @@
 #pragma once
 #include "../GameObject.h"
+#include "../../Scene/SceneManager.h"
 class ItemBase :
     public GameObject
 {
 protected:
-    int score = 0;;
+    int score = 0;
 public:
     //コンストラクタ
     ItemBase();

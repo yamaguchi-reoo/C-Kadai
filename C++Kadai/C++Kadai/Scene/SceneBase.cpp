@@ -18,9 +18,7 @@ eSceneType SceneBase::Update()
 {
 	for (GameObject* obj : objects)
 	{
-		//if (camera_location.x + obj->GetBoxSize().x && camera_location.x <= 800) {
-			obj->Update();
-		//}
+		obj->Update();
 	}
 
 	// 二重ループで衝突判定
@@ -39,6 +37,7 @@ eSceneType SceneBase::Update()
 	//削除フラグが立っているオブジェクトを削除
 	for (auto it = objects.begin(); it != objects.end();)
 	{
+		//フラグが立っているのなら
 		if ((*it)->GetDeleteFlg()) {
 			//削除処理
 			DeleteObject(*it);

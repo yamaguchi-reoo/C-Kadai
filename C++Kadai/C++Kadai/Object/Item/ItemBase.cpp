@@ -1,4 +1,6 @@
 #include "ItemBase.h"
+#include "../../Scene/GameScene/GameMainScene.h"
+
 
 ItemBase::ItemBase()
 {
@@ -35,5 +37,10 @@ void ItemBase::OnHitCollision(GameObject* hit_object)
 	if (hit_object->GetObjectType() == PLAYER)
 	{
 		this->SetDeleteFlg();
+		//もしプレイヤーに当たったのがコインなら
+		if (this->object_type == ITEM_COIN)
+		{
+			
+		}
 	}
 }

@@ -44,6 +44,11 @@ void SceneManager::Finalize()
 	}
 }
 
+SceneBase* SceneManager::GetCurrentScene()
+{
+	return current_scene;
+}
+
 void SceneManager::Draw() const
 {
 }

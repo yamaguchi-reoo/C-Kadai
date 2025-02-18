@@ -1,9 +1,6 @@
 #include <DxLib.h>
 #include "Player.h"
-#include "../../../Utility/InputControl.h"
-#include "../../../Utility/ResourceManager.h"
-#include "../../../Utility/UserTemplate.h"
-#include "../../../Utility/DebugInfomation.h"
+#include "../../../Utility/UtilityList.h"
 #include"../../../Object/Stage/Ground.h"
 
 #include <iostream>
@@ -203,10 +200,10 @@ void Player::Movement()
 	float max_speed = 5.0f;  // 最大速度
 	velocity.x = Min<float>(Max<float>(velocity.x, -max_speed), max_speed);
 
+
 	//位置を更新
 	location += velocity;
 }
-
 
 void Player::AnimationControl()
 {
@@ -268,9 +265,21 @@ void Player::OnHitCollision(GameObject* hit_object)
 		__super::ApplyDamage(1);
 	}
 
+	//エナジードリンクを拾ったとき
 	if (hit_object->GetObjectType() == ITEM_DRINK)
 	{
 		InvincibleState();
+	}
+	//コインを拾ったとき
+	else if(hit_object->GetObjectType() == ITEM_COIN)
+	{
+
+	}
+
+	//ギミックに当たった時
+	if (hit_object->GetObjectType() == GIMMICK)
+	{
+
 	}
 }
 

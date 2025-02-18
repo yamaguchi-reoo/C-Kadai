@@ -1,14 +1,14 @@
 #pragma once
 #include "GimmickBase.h"
 
-class GaolFlag :
+class GoalFlag :
     public GimmickBase
 {
 public:
     //コンストラクタ
-    GaolFlag();
+    GoalFlag();
     //デストラクタ
-    ~GaolFlag();
+    ~GoalFlag();
 
     //初期化処理
     void Initialize(Vector2D _location, Vector2D _box_size) override;

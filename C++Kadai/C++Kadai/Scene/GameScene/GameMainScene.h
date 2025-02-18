@@ -7,15 +7,15 @@ class GameMainScene :
 	public SceneBase
 {
 private:
-	//Player* player;
-	//EnemyRed* enemy_r;
-
 	int stage_width_num;    //ステージの横のブロック数
 	int stage_height_num;   //ステージの縦のブロック数
 
+	//ステージデータ格納用
 	int stage_data[STAGE_MAX_HEIGHT][STAGE_MAX_WIDTH];
 
 	bool draw_data_flg;		//ステージデータの描画フラグ
+
+	int score;
 
 	StageManager stage_manager;
 public:
@@ -35,6 +35,9 @@ public:
 	//ステージデータを生成
 	void SetStage();
 
+	//カメラの更新
 	void UpdateCamera();
+
+	void AddScore(int _score);
 };
 

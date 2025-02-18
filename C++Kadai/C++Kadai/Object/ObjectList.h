@@ -13,5 +13,8 @@
 #include "Item/Coin.h"
 #include "Item/EnergyDrink.h"
 
+#include "Gimmick/GimmickBase.h"
+#include "Gimmick/GoalFlag.h"
+
 #include "Stage/Ground.h"
 

@@ -141,7 +141,7 @@
     <ClCompile Include="Object\Item\EnergyDrink.cpp" />
     <ClCompile Include="Object\Item\Coin.cpp" />
     <ClCompile Include="Object\Item\ItemBase.cpp" />
-    <ClCompile Include="Object\Gimmick\GaolFlag.cpp" />
+    <ClCompile Include="Object\Gimmick\GoalFlag.cpp" />
     <ClCompile Include="Object\Gimmick\GimmickBase.cpp" />
     <ClCompile Include="Object\Character\Enemy\EnemyRed.cpp" />
     <ClCompile Include="Object\Character\Enemy\EnemyPurple.cpp" />
@@ -171,7 +171,7 @@
     <ClInclude Include="Object\Item\EnergyDrink.h" />
     <ClInclude Include="Object\Item\Coin.h" />
     <ClInclude Include="Object\Item\ItemBase.h" />
-    <ClInclude Include="Object\Gimmick\GaolFlag.h" />
+    <ClInclude Include="Object\Gimmick\GoalFlag.h" />
     <ClInclude Include="Object\Gimmick\GimmickBase.h" />
     <ClInclude Include="Object\Character\Enemy\EnemyRed.h" />
     <ClInclude Include="Object\Character\Enemy\EnemyPurple.h" />
@@ -186,6 +186,7 @@
     <ClInclude Include="Scene\SceneManager.h" />
     <ClInclude Include="Scene\SceneBase.h" />
     <ClInclude Include="Scene\GameScene\TitleScene.h" />
+    <ClInclude Include="Utility\UtilityList.h" />
     <ClInclude Include="Utility\Vector2D.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

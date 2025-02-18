@@ -14,6 +14,8 @@ public:
     void Initialize();  //初期化処理
     void Update();      //更新処理
     void Finalize();    //終了時処理
+    
+    SceneBase* GetCurrentScene();
 
 private:
     void Draw() const;  //描画処理
