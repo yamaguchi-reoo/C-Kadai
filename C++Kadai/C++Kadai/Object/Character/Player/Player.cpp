@@ -245,20 +245,20 @@ void Player::OnHitCollision(GameObject* hit_object)
 		if (this->location.x > hit_object->GetLocation().x)
 		{
 			// 敵が左に移動中なら、プレイヤーは右にノックバック
-			if (enemy_velocity < 0.0f)
-			{
-				velocity.x = 5.0f;  // ノックバックの力を右に設定
-			}
+			//if (enemy_velocity < 0.0f)
+			//{
+			//	velocity.x = 5.0f;  // ノックバックの力を右に設定
+			//}
 			velocity.x = 5.0f;
 		}
 		//プレイヤーが左にいるなら左にノックバック
 		else if(this->location.x < hit_object->GetLocation().x)
 		{
 			// 敵が右に移動中なら、プレイヤーは左にノックバック
-			if (enemy_velocity > 0.0f)
-			{
-				velocity.x = -5.0f;  // ノックバックの力を左に設定
-			}
+			//if (enemy_velocity > 0.0f)
+			//{
+			//	velocity.x = -5.0f;  // ノックバックの力を左に設定
+			//}
 			velocity.x = -5.0f;
 		}
 

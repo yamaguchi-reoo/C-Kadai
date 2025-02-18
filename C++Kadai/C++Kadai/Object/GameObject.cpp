@@ -83,9 +83,9 @@ void GameObject::OnHitCollision(GameObject* hit_object)
 bool GameObject::CheckBoxCollision(GameObject* obj)
 {
 	//自分の左上座標
-	Vector2D my_pos = location;
+	Vector2D my_pos = this->location;
 	//自分の幅と高さの半分
-	Vector2D my_size = box_size / 2.0f;
+	Vector2D my_size = this->box_size / 2.0f;
 
 	//相手の左上座標
 	Vector2D sub_pos = obj->GetLocation();

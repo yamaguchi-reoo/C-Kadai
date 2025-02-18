@@ -3,19 +3,31 @@
 
 class SceneManager
 {
+public:
+    
 private:
+    static SceneManager* instance;
     SceneBase* current_scene;   //現在シーン情報のポインタ
 
 public:
+    //インスタンス取得する処理
+    static SceneManager* GetInstance();
+    //インスタンスの削除
+    static void DeleteInstance();
+
     SceneManager();
     ~SceneManager();
+
+    // コピー禁止
+    SceneManager(const SceneManager&) = delete;
+    SceneManager& operator=(const SceneManager&) = delete;
 
 
     void Initialize();  //初期化処理
     void Update();      //更新処理
     void Finalize();    //終了時処理
     
-    SceneBase* GetCurrentScene();
+    SceneBase* GetCurrentScene() const;
 
 private:
     void Draw() const;  //描画処理

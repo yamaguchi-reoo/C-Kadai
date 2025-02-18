@@ -169,7 +169,7 @@ void GameMainScene::SetStage()
 				CreateObject<EnergyDrink>(Vector2D(j * BOX_SIZE, i * BOX_SIZE), Vector2D(32.0f, 64.0f));
 				break;
 			case GIMMICK:
-				CreateObject<GoalFlag>(Vector2D(j * BOX_SIZE, i * BOX_SIZE), Vector2D(32.0f, 48.0f));
+				CreateObject<GoalFlag>(Vector2D(j * BOX_SIZE, i * BOX_SIZE), Vector2D(32.0f));
 				break;
 			default:
 				break;

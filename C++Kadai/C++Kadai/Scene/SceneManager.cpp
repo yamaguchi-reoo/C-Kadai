@@ -5,6 +5,31 @@
 #include "GameScene/GameMainScene.h"
 #include "../Utility/DebugInfomation.h"
 
+//静的メンバ変数定義
+SceneManager* SceneManager::instance = nullptr;
+
+SceneManager* SceneManager::GetInstance()
+{
+	//インスタンスが無ければ、生成する
+	if (instance == nullptr)
+	{
+		instance = new SceneManager();
+	}
+
+	//自分自身でポインタを返却する
+	return instance;
+}
+
+void SceneManager::DeleteInstance()
+{
+	//インスタンスが存在していれば、削除する
+	if (instance != nullptr)
+	{
+		delete instance;
+		instance = nullptr;
+	}
+}
+
 SceneManager::SceneManager() :current_scene(nullptr)
 {
 }
@@ -44,7 +69,7 @@ void SceneManager::Finalize()
 	}
 }
 
-SceneBase* SceneManager::GetCurrentScene()
+SceneBase* SceneManager::GetCurrentScene() const
 {
 	return current_scene;
 }

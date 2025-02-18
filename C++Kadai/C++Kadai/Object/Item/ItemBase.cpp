@@ -40,7 +40,14 @@ void ItemBase::OnHitCollision(GameObject* hit_object)
 		//もしプレイヤーに当たったのがコインなら
 		if (this->object_type == ITEM_COIN)
 		{
-			
+			SceneManager* scene_manager = SceneManager::GetInstance();
+			GameMainScene* game_main = dynamic_cast<GameMainScene*>(scene_manager->GetCurrentScene());
+
+			if (game_main != nullptr) {
+				game_main->AddScore(score);
+			}
+
+
 		}
 	}
 }

@@ -25,8 +25,7 @@ void GoalFlag::Update()
 void GoalFlag::Draw(Vector2D offset, double rate) const
 {
 	__super::Draw(offset, rate);
-	//DrawString(offset.x + (box_size.x / 2) - 17, offset.y + (box_size.y / 2) - 4, "ごーる", GetColor(255, 0, 255), FALSE);
-	DrawString(offset.x + (box_size.x / 2) - 17, offset.y + (box_size.y / 2) - 4, "コイン", GetColor(255, 0, 0), FALSE);
+	DrawString(offset.x + (box_size.x / 2) - 17, offset.y + (box_size.y / 2) - 4, "ごーる", GetColor(255, 0, 255), FALSE);
 }
 
 void GoalFlag::Finalize()

@@ -88,7 +88,7 @@ void CharacterBase::OnHitCollision(GameObject* hit_object)
 
 
 			//衝突の深さ（めり込み量）を計算
-			if (depth_x< depth_y)
+			if (depth_x < depth_y)
 			{
 				// 横方向の衝突処理
 				if (obj_location.x < target_location.x)
