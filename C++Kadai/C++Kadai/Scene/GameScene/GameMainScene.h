@@ -7,7 +7,7 @@ enum class eGameState
 {
 	GAME_MAIN = 0,
 	GAME_CLEAR,
-	GAMEO_OVER
+	GAME_OVER
 };
 
 class GameMainScene :
@@ -55,8 +55,13 @@ public:
 	//
 	void ChangeGameState(eGameState _state);
 
+	//ゲームシーン
 	void GameClear();
 	void GameOver();
 
+	//選択用ボックス描画
+	void SelectDrawBox()const;
+
+	eSceneType SelectSceneType();
 };
 

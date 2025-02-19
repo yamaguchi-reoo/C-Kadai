@@ -28,7 +28,7 @@ void CharacterBase::Update()
 		this->SetDeleteFlg();
 		if (this->object_type == PLAYER)
 		{
-			game_main->ChangeGameState(eGameState::GAMEO_OVER);
+			game_main->ChangeGameState(eGameState::GAME_OVER);
 		}
 	}
 

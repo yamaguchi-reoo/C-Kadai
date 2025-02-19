@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Scene\GameScene\EndScene.cpp" />
     <ClCompile Include="Object\Stage\StageEditor.cpp" />
     <ClCompile Include="Object\Stage\StageManager.cpp" />
     <ClCompile Include="Utility\FpsController.cpp" />
@@ -161,6 +162,7 @@
     <ClCompile Include="Utility\Vector2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Scene\GameScene\EndScene.h" />
     <ClInclude Include="Object\ObjectList.h" />
     <ClInclude Include="Object\Stage\StageEditor.h" />
     <ClInclude Include="Object\Stage\StageManager.h" />

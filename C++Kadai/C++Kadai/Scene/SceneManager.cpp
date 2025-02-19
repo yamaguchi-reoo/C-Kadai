@@ -3,6 +3,7 @@
 #include "GameScene/TitleScene.h"
 #include "GameScene/ResultScene.h"
 #include "GameScene/GameMainScene.h"
+#include "GameScene/EndScene.h"
 #include "../Utility/DebugInfomation.h"
 
 //静的メンバ変数定義
@@ -41,7 +42,8 @@ SceneManager::~SceneManager()
 
 void SceneManager::Initialize()
 {
-	ChangeScene(eSceneType::GAME_MAIN);
+	//ChangeScene(eSceneType::GAME_MAIN);
+	ChangeScene(eSceneType::TITLE);
 }
 
 void SceneManager::Update()
@@ -111,6 +113,8 @@ SceneBase* SceneManager::CreateScene(eSceneType type)
 		return dynamic_cast<SceneBase*>(new GameMainScene());
 	case eSceneType::RESULT:
 		return dynamic_cast<SceneBase*>(new ResultScene());
+	case eSceneType::END:
+		return dynamic_cast<SceneBase*>(new EndScene());
 	default:
 		return nullptr;
 	}

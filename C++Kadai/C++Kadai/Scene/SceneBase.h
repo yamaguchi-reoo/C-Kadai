@@ -4,9 +4,10 @@
 
 enum class eSceneType
 {
-	TITLE,
+	TITLE = 0,
 	GAME_MAIN,
-	RESULT
+	RESULT,
+	END
 };
 
 class SceneBase
@@ -14,6 +15,8 @@ class SceneBase
 protected:
 	std::vector<GameObject*>objects;
 	Vector2D camera_location;
+
+	int cursor = 0;
 
 public:
 	//コンストラクタ

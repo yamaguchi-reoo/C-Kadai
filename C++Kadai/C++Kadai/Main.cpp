@@ -17,7 +17,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 #endif
 
 #ifdef _DEBUG
-	SetGraphMode(DEBUG_SCREEN_WIDTH, DEBUG_SCREEN_HEIGHT, 32); // ウインドウのサイズ
+	//SetGraphMode(DEBUG_SCREEN_WIDTH, DEBUG_SCREEN_HEIGHT, 32); // ウインドウのサイズ
+	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, 32); // ウインドウのサイズ
 #endif
 
 	ChangeWindowMode(TRUE);

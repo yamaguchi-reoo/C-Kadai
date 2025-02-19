@@ -3,6 +3,7 @@
 class TitleScene :
     public SceneBase
 {
+private:
 public:
 	TitleScene();
 	~TitleScene();
