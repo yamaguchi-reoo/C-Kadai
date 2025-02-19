@@ -4,7 +4,7 @@
 #include "../common.h"
 #include "../Scene/SceneBase.h"
 
-GameObject::GameObject() : location(), box_size(), image(NULL), object_type(), flip_flg(FALSE), move(), stage_hit_flg(),delete_flg()
+GameObject::GameObject() : location(), box_size(), image(NULL), object_type(), flip_flg(FALSE),delete_flg()
 {
 }
 

@@ -1,6 +1,6 @@
 #include "SceneBase.h"
 #include "../common.h"
-
+#include <DxLib.h>
 SceneBase::SceneBase()
 {
 }
@@ -56,6 +56,7 @@ eSceneType SceneBase::Update()
 
 void SceneBase::Draw() const
 {
+
 	for (GameObject* obj : objects)
 	{
 		Vector2D draw_location = obj->GetLocation() - camera_location;

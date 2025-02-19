@@ -1,9 +1,12 @@
 #pragma once
 #include "GimmickBase.h"
+#include <vector>
 
 class GoalFlag :
     public GimmickBase
 {
+private:
+    std::vector<int> animation_data;//アニメーションデータ
 public:
     //コンストラクタ
     GoalFlag();

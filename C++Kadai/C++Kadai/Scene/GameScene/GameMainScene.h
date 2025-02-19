@@ -24,6 +24,8 @@ private:
 
 	int score;
 
+	int image;
+
 	//StageManager stage_manager;
 
 	//ゲームメインの状態
@@ -62,6 +64,6 @@ public:
 	//選択用ボックス描画
 	void SelectDrawBox()const;
 
-	eSceneType SelectSceneType();
+	int SelectSceneType();
 };
 

@@ -8,7 +8,7 @@
 #include "../../Object/ObjectList.h"
 
 
-GameMainScene::GameMainScene() :stage_width_num(0), stage_height_num(0), stage_data{ 0 }, draw_data_flg(false),score(), game_state(eGameState::GAME_MAIN)
+GameMainScene::GameMainScene() :stage_width_num(0), stage_height_num(0), stage_data{ 0 }, draw_data_flg(false),score(), game_state(eGameState::GAME_MAIN),image()
 {
 }
 
@@ -26,6 +26,8 @@ void GameMainScene::Initialize()
 
 	cursor = 0;
 	score = 0;
+
+	image = LoadGraph("Resource/Images/BackGround.png");
 }
 
 eSceneType GameMainScene::Update()
@@ -37,8 +39,6 @@ eSceneType GameMainScene::Update()
 		draw_data_flg = !draw_data_flg;
 	}
 
-
-
 	//Gameの状態
 	switch (game_state)
 	{
@@ -49,38 +49,24 @@ eSceneType GameMainScene::Update()
 		return __super::Update();
 		break;
 	case eGameState::GAME_CLEAR:
-		//上キーで移動
-		if (input->GetKeyDown(KEY_INPUT_UP))cursor = (cursor - 1 + 2) % 2;
-		//下キーで移動
-		if (input->GetKeyDown(KEY_INPUT_DOWN))cursor = (cursor + 1) % 2;
+	case eGameState::GAME_OVER:
 		//決定
 		if (input->GetKeyDown(KEY_INPUT_SPACE)) {
 			if (cursor == 0)return eSceneType::RESULT;
 			else return eSceneType::TITLE;
 		}
 		break;
-	case eGameState::GAME_OVER:
-		//上キーで移動
-		if (input->GetKeyDown(KEY_INPUT_UP))cursor = (cursor - 1 + 2) % 2;
-		//下キーで移動
-		if (input->GetKeyDown(KEY_INPUT_DOWN))cursor = (cursor + 1) % 2;
-		//決定
-		if (input->GetKeyDown(KEY_INPUT_SPACE)) {
-			if (cursor == 0)
-			{
-				GameOver();
-				return eSceneType::GAME_MAIN;
-			}
-			else
-			{
-				return eSceneType::TITLE;
-			}
-		}
-		break;
 	default:
 		break;
 	}
 
+	if (game_state != eGameState::GAME_MAIN)
+	{
+		//上キーで移動
+		if (input->GetKeyDown(KEY_INPUT_UP))cursor = (cursor - 1 + 2) % 2;
+		//下キーで移動
+		if (input->GetKeyDown(KEY_INPUT_DOWN))cursor = (cursor + 1) % 2;
+	}
 
 
 	//return __super::Update();
@@ -89,7 +75,7 @@ eSceneType GameMainScene::Update()
 
 void GameMainScene::Draw() const
 {
-
+	DrawGraph(0, 0, image,TRUE);
 	//一時的にフォントサイズを変更する
 	int oldFontSize = GetFontSize();
 	//残機描画
@@ -303,18 +289,13 @@ void GameMainScene::SelectDrawBox()const
 		}
 		DrawBox((SCREEN_WIDTH / 2) - (120 / 2), y, (SCREEN_WIDTH / 2) + (120 / 2), y + 40, color, FALSE);
 
-
 		// テキスト描画
-		if(game_state == eGameState::GAME_OVER)DrawFormatString((SCREEN_WIDTH / 2) - 40, y + 7, GetColor(255, 255, 255), i == 0 ? "MAIN" : "TITLE");
-		else if(game_state == eGameState::GAME_CLEAR)DrawFormatString((SCREEN_WIDTH / 2) - 40, y + 7, GetColor(255, 255, 255), i == 0 ? "RESULT" : "TITLE");
+		if(game_state == eGameState::GAME_OVER || game_state == eGameState::GAME_CLEAR)DrawFormatString((SCREEN_WIDTH / 2) - 40, y + 7, GetColor(255, 255, 255), i == 0 ? "RESULT" : "TITLE");
 
 	}
 }
 
-eSceneType GameMainScene::SelectSceneType()
+int GameMainScene::SelectSceneType()
 {
-	InputControl* input = InputControl::GetInstance();
-
-	
-	return GetNowSceneType();
+	return cursor;
 }

@@ -23,7 +23,7 @@ void CharacterBase::Update()
 	SceneManager* scene_manager = SceneManager::GetInstance();
 	GameMainScene* game_main = scene_manager->GetGameMainScene();
 	//座標が画面より下になったら削除
-	if (SCREEN_HEIGHT + 80 <= this->location.y)
+	if (SCREEN_HEIGHT + 80 <= this->location.y || hp <= 0)
 	{
 		this->SetDeleteFlg();
 		if (this->object_type == PLAYER)
@@ -31,6 +31,17 @@ void CharacterBase::Update()
 			game_main->ChangeGameState(eGameState::GAME_OVER);
 		}
 	}
+
+	/*if (hp <= 0)
+	{
+		this->SetDeleteFlg();
+		if (this->object_type == PLAYER)
+		{
+			game_main->ChangeGameState(eGameState::GAME_OVER);
+		}
+
+	}*/
+
 
 	//ダメージを受けた際の処理
 	if (damage_flg)
@@ -57,10 +68,6 @@ void CharacterBase::ApplyDamage(int _damage)
 	this->damage_flg = true;
 	hp -= _damage;
 
-	if (hp <= 0)
-	{
-		hp = 5;//死亡処理
-	}
 }
 
 void CharacterBase::OnDamaged(int _damage)

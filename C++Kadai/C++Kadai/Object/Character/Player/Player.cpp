@@ -4,7 +4,7 @@
 #include"../../../Object/Stage/Ground.h"
 #include "../../../Scene/SceneManager.h"
 #include "../../../Scene/GameScene/GameMainScene.h"
-
+#include "../../Character/Enemy/EnemyBase.h"
 #include <iostream>
 #include <algorithm>
 
@@ -101,7 +101,7 @@ void Player::Draw(Vector2D offset, double rate) const
 	DrawRotaGraphF(35,32, 0.5, 0.0, image, TRUE, FALSE);
 
 	//元のフォントサイズに戻す
-	SetFontSize(oldFontSize);
+	SetFontSize(12);
 
 
 	DebugInfomation::Add("flg", jump_flag);
@@ -235,37 +235,36 @@ void Player::OnHitCollision(GameObject* hit_object)
 
 	if (hit_object->GetObjectType() == ENEMY_RED || hit_object->GetObjectType() == ENEMY_PURPLE)
 	{
-		//ダメージ受けて一定時間は無敵に
-		if (damage_flg)
+		if(!invincible_flg)
 		{
-			return;
-		}
+			//ダメージ受けて一定時間は無敵に
+			if (damage_flg)
+			{
+				return;
+			}
 
-		float enemy_velocity = hit_object->GetVelocity().x;
-		//ノックバック
-		//プレイヤーが右にいるなら右にノックバック
-		if (this->location.x > hit_object->GetLocation().x)
-		{
-			// 敵が左に移動中なら、プレイヤーは右にノックバック
-			//if (enemy_velocity < 0.0f)
-			//{
-			//	velocity.x = 5.0f;  // ノックバックの力を右に設定
-			//}
-			velocity.x = 5.0f;
-		}
-		//プレイヤーが左にいるなら左にノックバック
-		else if(this->location.x < hit_object->GetLocation().x)
-		{
-			// 敵が右に移動中なら、プレイヤーは左にノックバック
-			//if (enemy_velocity > 0.0f)
-			//{
-			//	velocity.x = -5.0f;  // ノックバックの力を左に設定
-			//}
-			velocity.x = -5.0f;
-		}
+			float enemy_velocity = hit_object->GetVelocity().x;
+			//ノックバック
+			//プレイヤーが右にいるなら右にノックバック
+			if (this->location.x > hit_object->GetLocation().x)
+			{
+				velocity.x = 5.0f;
+			}
+			//プレイヤーが左にいるなら左にノックバック
+			else if (this->location.x < hit_object->GetLocation().x)
+			{
+				velocity.x = -5.0f;
+			}
 
-		__super::ApplyDamage(1);
+			__super::ApplyDamage(1);
+		}
+		if (invincible_flg == true)
+		{
+			EnemyBase* enemy = dynamic_cast<EnemyBase*>(hit_object);
+			enemy->ApplyDamage(200);
+		}
 	}
+	
 
 	//ゲームメイン取得
 	SceneManager* scene_manager = SceneManager::GetInstance();
