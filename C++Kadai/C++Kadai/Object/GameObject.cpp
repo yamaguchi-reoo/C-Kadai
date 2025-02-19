@@ -4,7 +4,7 @@
 #include "../common.h"
 #include "../Scene/SceneBase.h"
 
-GameObject::GameObject() : location(), box_size(), image(NULL), object_type(), flip_flg(FALSE),delete_flg()
+GameObject::GameObject() : location(), box_size(), image(NULL), object_type(), flip_flg(FALSE), delete_flg(), animation_data()
 {
 }
 
@@ -32,16 +32,16 @@ void GameObject::Update()
 void GameObject::Draw(Vector2D offset, double rate) const
 {
 	// 描画範囲の判定
-	if (offset.x + box_size.x >= 0 && offset.x < SCREEN_WIDTH) 
+	//if (offset.x + box_size.x >= 0 && offset.x < SCREEN_WIDTH) 
 	{
 		//メンバの情報を基に画像を描画する
 		DrawRotaGraphF(offset.x + (box_size.x / 2), offset.y + (box_size.y / 2), rate, 0.0, image, TRUE, flip_flg);
 		// デバッグ用の当たり判定ボックス描画
-		DrawBoxAA(offset.x, offset.y, offset.x + box_size.x, offset.y + box_size.y, GetColor(255, 0, 0), FALSE);
+		//DrawBoxAA(offset.x, offset.y, offset.x + box_size.x, offset.y + box_size.y, GetColor(255, 0, 0), FALSE);
 	}
 
 	//描画範囲の可視化
-	DrawBoxAA(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, GetColor(255, 0, 0), FALSE);
+	//DrawBoxAA(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, GetColor(255, 0, 0), FALSE);
 }
 
 void GameObject::Finalize()

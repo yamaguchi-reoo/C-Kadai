@@ -15,6 +15,7 @@ void Ground::Update()
 void Ground::Draw(Vector2D offset, double rate) const
 {
 	__super::Draw(offset, 1.0);
+	DrawBox(offset.x, offset.y, offset.x + box_size.x, offset.y + box_size.y, GetColor(0, 0, 0), TRUE);
 }
 
 void Ground::Finalize()

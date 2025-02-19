@@ -73,7 +73,7 @@ void Player::Draw(Vector2D offset, double rate) const
 	if (damage_flg) {
 		if (count % 5 == 0) {
 			//親クラスに書かれた描画処理の内容を実行する
-			__super::Draw(offset, 1.0);
+			__super::Draw(offset, 0.6);
 		}
 	}
 	//無敵時間中はあり得んくらいチカチカさせる
@@ -82,13 +82,13 @@ void Player::Draw(Vector2D offset, double rate) const
 		if (invincible_time % 2 == 0)
 		{
 			//親クラスに書かれた描画処理の内容を実行する
-			__super::Draw(offset, 1.0);
+			__super::Draw(offset, 0.6);
 		}
 	}
 	else
 	{
 		//親クラスに書かれた描画処理の内容を実行する
-		__super::Draw(offset, 1.0);
+		__super::Draw(offset, 0.6);
 	}
 
 	//一時的にフォントサイズを変更する

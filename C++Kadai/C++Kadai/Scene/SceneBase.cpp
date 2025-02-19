@@ -16,9 +16,20 @@ void SceneBase::Initialize()
 
 eSceneType SceneBase::Update()
 {
-	for (GameObject* obj : objects)
+	/*for (GameObject* obj : objects)
 	{
 		obj->Update();
+	}*/
+
+	for (GameObject* obj : objects)
+	{
+		// 画面内にいるか判定
+		Vector2D draw_location = obj->GetLocation() - camera_location;
+		if (draw_location.x + obj->GetBoxSize().x >= 0 && draw_location.x < SCREEN_WIDTH + 50 &&
+			draw_location.y + obj->GetBoxSize().y >= 0 && draw_location.y < SCREEN_HEIGHT + 100)
+		{
+			obj->Update();
+		}
 	}
 
 	// 二重ループで衝突判定

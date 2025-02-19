@@ -27,7 +27,7 @@ void GameMainScene::Initialize()
 	cursor = 0;
 	score = 0;
 
-	image = LoadGraph("Resource/Images/BackGround.png");
+	image = LoadGraph("Resource/Images/back_image.png");
 }
 
 eSceneType GameMainScene::Update()
@@ -84,13 +84,17 @@ void GameMainScene::Draw() const
 	switch (game_state)
 	{
 	case eGameState::GAME_MAIN:
+
+		DrawFormatString(540, 10, GetColor(255, 255, 255), "%d", score);
 		__super::Draw();
 		break;
 	case eGameState::GAME_CLEAR:
+		DrawBox(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, GetColor(0, 0, 0), TRUE);
 		DrawString((SCREEN_WIDTH / 2) - 60, SCREEN_HEIGHT / 2 - 100, "GameClear", GetColor(255, 255, 0));
 		SelectDrawBox();
 		break;
 	case eGameState::GAME_OVER:
+		DrawBox(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, GetColor(0, 0, 0), TRUE);
 		DrawString(SCREEN_WIDTH / 2 - 60, SCREEN_HEIGHT / 2 - 100, "GameOver", GetColor(255, 255, 255));
 		SelectDrawBox();
 		break;
@@ -98,7 +102,6 @@ void GameMainScene::Draw() const
 		break;
 	}
 
-	DrawFormatString(540, 10, GetColor(255, 255, 255), "%d", score);
 	//元のフォントサイズに戻す
 	SetFontSize(oldFontSize);
 
@@ -191,7 +194,7 @@ void GameMainScene::SetStage()
 			case 0:
 				break;
 			case BLOCK:
-				CreateObject<Ground>(Vector2D(j * BOX_SIZE, i * BOX_SIZE), Vector2D(32.0f));
+				CreateObject<Ground>(Vector2D(j * BOX_SIZE, i * BOX_SIZE), Vector2D(32.0f,32.0f));
 				break;
 			case PLAYER:
 				CreateObject<Player>(Vector2D(j * BOX_SIZE, i * BOX_SIZE), Vector2D(64.0f));

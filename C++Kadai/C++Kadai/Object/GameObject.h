@@ -1,6 +1,6 @@
 #pragma once
 #include "../Utility/Vector2D.h"
-
+#include <vector>
 
 enum eObjectType
 {
@@ -20,6 +20,7 @@ protected:
 	Vector2D box_size;	//オブジェクトのサイズ
 	Vector2D velocity = { 0.0f };
 
+	std::vector<int> animation_data;//アニメーションデータ
 	int image;			//描画する画像データ
 	bool flip_flg;		//描画する反転フラグ
 	bool delete_flg;

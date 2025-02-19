@@ -37,7 +37,7 @@ void EnemyRed::Update()
 void EnemyRed::Draw(Vector2D offset, double rate) const
 {
 	//親クラスに書かれた描画処理の内容を実行する
-	__super::Draw(offset, 0.7);
+	__super::Draw({ offset.x, offset.y + 3}, 0.6);
 
 }
 

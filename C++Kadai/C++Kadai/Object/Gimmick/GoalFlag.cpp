@@ -2,7 +2,7 @@
 #include <DxLib.h>
 #include "../../Utility/ResourceManager.h"
 
-GoalFlag::GoalFlag():animation_data()
+GoalFlag::GoalFlag()/*:animation_data()*/
 {
 	
 }

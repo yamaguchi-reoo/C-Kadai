@@ -20,15 +20,15 @@ eSceneType TitleScene::Update()
 {
 	InputControl* input = InputControl::GetInstance();
 	//SPACEキーでインゲーム画面に遷移する
-	if (input->GetKeyDown(KEY_INPUT_A))
-	{
-		return eSceneType::GAME_MAIN;
-	}
-	//SPACEキーでインゲーム画面に遷移する
-	if (input->GetKeyDown(KEY_INPUT_S))
-	{
-		return eSceneType::RESULT;
-	}
+	//if (input->GetKeyDown(KEY_INPUT_A))
+	//{
+	//	return eSceneType::GAME_MAIN;
+	//}
+	////SPACEキーでインゲーム画面に遷移する
+	//if (input->GetKeyDown(KEY_INPUT_S))
+	//{
+	//	return eSceneType::RESULT;
+	//}
 
 	//負の値にならないように
 	//上キーで移動
@@ -57,26 +57,34 @@ void TitleScene::Draw() const
 	SetFontSize(28);
 	DrawFormatString((SCREEN_WIDTH / 2) - 90, (SCREEN_HEIGHT / 2) - 40, GetColor(255, 255, 255), "タイトル画面");
 
-	for (int i = 0; i < 2; i++)  // i は 0 から始める
-	{
-		int y = (SCREEN_HEIGHT / 2) + 50 + i * (40 + 10); // 四角形の間隔を考慮
+	//for (int i = 0; i < 2; i++)  // i は 0 から始める
+	//{
+	//	int y = (SCREEN_HEIGHT / 2) + 50 + i * (40 + 10); // 四角形の間隔を考慮
 
-		// 選択中は黄色
-		int color = 0;
-		if (i == cursor)
-		{
-			color = GetColor(255, 255, 0);
-		}
-		else
-		{
-			color = GetColor(255, 0, 0);
-		}
-		DrawBox((SCREEN_WIDTH / 2) - (120 / 2), y, (SCREEN_WIDTH / 2) + (120 / 2), y + 40, color, FALSE);
+	//	// 選択中は黄色
+	//	int color = 0;
+	//	if (i == cursor)
+	//	{
+	//		color = GetColor(255, 255, 0);
+	//	}
+	//	else
+	//	{
+	//		color = GetColor(255, 0, 0);
+	//	}
+	//	DrawBox((SCREEN_WIDTH / 2) - (120 / 2), y, (SCREEN_WIDTH / 2) + (120 / 2), y + 40, color, FALSE);
 
 
-		// テキスト描画
-		DrawFormatString((SCREEN_WIDTH / 2) - 40, y + 7, GetColor(255, 255, 255), i == 0 ? "START" : "END");
-	}
+	//	// テキスト描画
+	//	DrawFormatString((SCREEN_WIDTH / 2) - 40, y + 7, GetColor(255, 255, 255), i == 0 ? "START" : "END");
+	// 
+	//}
+
+	int y = (SCREEN_HEIGHT / 2) + 50 +(40 + 10); // 四角形の間隔を考慮
+
+	DrawBox((SCREEN_WIDTH / 2) - (120 / 2), y, (SCREEN_WIDTH / 2) + (120 / 2), y + 40, GetColor(255, 255, 0), FALSE);
+	DrawFormatString((SCREEN_WIDTH / 2) - 40, y + 7, GetColor(255, 255, 255), "START");
+
+	SetFontSize(12);
 
 
 

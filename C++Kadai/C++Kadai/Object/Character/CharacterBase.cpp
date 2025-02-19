@@ -32,17 +32,6 @@ void CharacterBase::Update()
 		}
 	}
 
-	/*if (hp <= 0)
-	{
-		this->SetDeleteFlg();
-		if (this->object_type == PLAYER)
-		{
-			game_main->ChangeGameState(eGameState::GAME_OVER);
-		}
-
-	}*/
-
-
 	//ダメージを受けた際の処理
 	if (damage_flg)
 	{

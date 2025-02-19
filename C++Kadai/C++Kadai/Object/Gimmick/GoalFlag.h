@@ -6,7 +6,7 @@ class GoalFlag :
     public GimmickBase
 {
 private:
-    std::vector<int> animation_data;//アニメーションデータ
+    //std::vector<int> animation_data;//アニメーションデータ
 public:
     //コンストラクタ
     GoalFlag();

@@ -1,6 +1,5 @@
 #pragma once
 #include "../SceneBase.h"
-#include "../../Object/Stage/StageManager.h"
 #include "../../common.h"
 
 enum class eGameState
