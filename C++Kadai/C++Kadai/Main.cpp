@@ -29,18 +29,19 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 	SetDrawScreen(DX_SCREEN_BACK);
 
-	SceneManager* manager = nullptr;
+	//SceneManager* manager = nullptr;
 
+	SceneManager* manager = SceneManager::GetInstance();
 	//fps制御
 	FpsController* FPSC = new FpsController(FRAMERATE, 800);
 	ResourceManager* rm = ResourceManager::GetInstance();
 
 	try {
-		manager = new SceneManager();
 
 		manager->Initialize();
 
 		InputControl* input = InputControl::GetInstance();
+
 
 		while (ProcessMessage() != -1)
 		{

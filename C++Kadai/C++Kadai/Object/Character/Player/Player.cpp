@@ -2,6 +2,8 @@
 #include "Player.h"
 #include "../../../Utility/UtilityList.h"
 #include"../../../Object/Stage/Ground.h"
+#include "../../../Scene/SceneManager.h"
+#include "../../../Scene/GameScene/GameMainScene.h"
 
 #include <iostream>
 #include <algorithm>
@@ -265,6 +267,10 @@ void Player::OnHitCollision(GameObject* hit_object)
 		__super::ApplyDamage(1);
 	}
 
+	//ゲームメイン取得
+	SceneManager* scene_manager = SceneManager::GetInstance();
+	GameMainScene* game_main = scene_manager->GetGameMainScene();
+
 	//エナジードリンクを拾ったとき
 	if (hit_object->GetObjectType() == ITEM_DRINK)
 	{
@@ -273,7 +279,9 @@ void Player::OnHitCollision(GameObject* hit_object)
 	//コインを拾ったとき
 	else if(hit_object->GetObjectType() == ITEM_COIN)
 	{
-
+		if (game_main != nullptr) {
+			game_main->AddScore(100);
+		}
 	}
 
 	//ギミックに当たった時

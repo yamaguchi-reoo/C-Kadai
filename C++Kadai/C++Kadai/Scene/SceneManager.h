@@ -1,5 +1,6 @@
 #pragma once
 #include "SceneBase.h"
+#include "GameScene/GameMainScene.h"
 
 class SceneManager
 {
@@ -28,6 +29,12 @@ public:
     void Finalize();    //終了時処理
     
     SceneBase* GetCurrentScene() const;
+
+    //ゲームメインの取得
+    GameMainScene* GetGameMainScene()
+    {
+        return dynamic_cast<GameMainScene*>(current_scene);
+    }
 
 private:
     void Draw() const;  //描画処理

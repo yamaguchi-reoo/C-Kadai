@@ -2,10 +2,8 @@
 #include <vector>
 #include <string>
 #include "../GameObject.h"
+#include "../../common.h"
 
-#define BOX_SIZE 32
-#define STAGE_MAX_WIDTH 500
-#define STAGE_MAX_HEIGHT 500
 
 struct StageData{
 	int x, y;
