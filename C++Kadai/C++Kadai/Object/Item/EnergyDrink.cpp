@@ -25,7 +25,7 @@ void EnergyDrink::Draw(Vector2D offset, double rate) const
 	__super::Draw(offset, 1.0f);
 	DrawString(offset.x + (box_size.x / 2) - 3, offset.y + (box_size.y / 2) - 4, "飲", GetColor(0, 255, 0), FALSE);
 
-	DrawFormatString(20, 300, GetColor(255, 255, 255), "%d", delete_flg);
+	//DrawFormatString(20, 300, GetColor(255, 255, 255), "%d", delete_flg);
 }
 
 void EnergyDrink::Finalize()

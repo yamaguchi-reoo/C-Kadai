@@ -2,6 +2,8 @@
 #include <iostream>
 #include <algorithm>
 #include "../../common.h"
+#include "../../Scene/GameScene/GameMainScene.h"
+#include "../../Scene/SceneManager.h"
 
 #define GRAVITY (9.087f)
 
@@ -17,10 +19,17 @@ void CharacterBase::Update()
 	velocity.y += g_velocity;// 重力を加算
 	location.y += velocity.y;
 
+	//ゲームメイン取得
+	SceneManager* scene_manager = SceneManager::GetInstance();
+	GameMainScene* game_main = scene_manager->GetGameMainScene();
 	//座標が画面より下になったら削除
 	if (SCREEN_HEIGHT + 80 <= this->location.y)
 	{
 		this->SetDeleteFlg();
+		if (this->object_type == PLAYER)
+		{
+			game_main->ChangeGameState(eGameState::GAMEO_OVER);
+		}
 	}
 
 	//ダメージを受けた際の処理

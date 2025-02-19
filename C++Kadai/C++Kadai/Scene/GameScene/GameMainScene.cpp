@@ -8,7 +8,7 @@
 #include "../../Object/ObjectList.h"
 
 
-GameMainScene::GameMainScene() :stage_width_num(0), stage_height_num(0), stage_data{ 0 }, draw_data_flg(false),score()
+GameMainScene::GameMainScene() :stage_width_num(0), stage_height_num(0), stage_data{ 0 }, draw_data_flg(false),score(), game_state(eGameState::GAME_MAIN)
 {
 }
 
@@ -20,6 +20,8 @@ void GameMainScene::Initialize()
 {
 	//ステージ読み込み
 	LoadStage();
+
+	game_state = eGameState::GAME_MAIN;
 
 	score = 0;
 }
@@ -43,21 +45,67 @@ eSceneType GameMainScene::Update()
 		draw_data_flg = !draw_data_flg;
 	}
 
-	UpdateCamera();
 
-	//score++;
+	//Gameの状態
+	switch (game_state)
+	{
+	case eGameState::GAME_MAIN:
+		//カメラの更新
+		UpdateCamera();
+		//更新
+		return __super::Update();
+		break;
+	case eGameState::GAME_CLEAR:
+		GameClear();
+		//SPACEキーでインゲーム画面に遷移する
+		if (input->GetKeyDown(KEY_INPUT_D))
+		{
+			return eSceneType::TITLE;
+		}
+		//SPACEキーでインゲーム画面に遷移する
+		if (input->GetKeyDown(KEY_INPUT_S))
+		{
+			return eSceneType::RESULT;
+		}
+		break;
+	case eGameState::GAMEO_OVER:
+		GameOver();
+		break;
+	default:
+		break;
+	}
 
-	return __super::Update();
+
+
+	//return __super::Update();
+	return GetNowSceneType();
 }
 
 void GameMainScene::Draw() const
 {
-	__super::Draw();
 
 	//一時的にフォントサイズを変更する
 	int oldFontSize = GetFontSize();
 	//残機描画
 	SetFontSize(28);
+
+	switch (game_state)
+	{
+	case eGameState::GAME_MAIN:
+		__super::Draw();
+		break;
+	case eGameState::GAME_CLEAR:
+		DrawString((SCREEN_WIDTH / 2) - 60, SCREEN_HEIGHT / 2, "GameClear", GetColor(255, 255, 0));
+		break;
+	case eGameState::GAMEO_OVER:
+		DrawString(SCREEN_WIDTH / 2 - 40, SCREEN_HEIGHT / 2, "GameOver", GetColor(255, 255, 255));
+		break;
+	default:
+		break;
+	}
+	//__super::Draw();
+
+
 	DrawFormatString(540, 10, GetColor(255, 255, 255), "%d", score);
 	//元のフォントサイズに戻す
 	SetFontSize(oldFontSize);
@@ -210,4 +258,19 @@ void GameMainScene::UpdateCamera()
 void GameMainScene::AddScore(int _score)
 {
 	score += _score;
+}
+
+void GameMainScene::ChangeGameState(eGameState _state)
+{
+	game_state = _state;
+}
+
+void GameMainScene::GameClear()
+{
+
+}
+
+void GameMainScene::GameOver()
+{
+
 }

@@ -3,6 +3,13 @@
 #include "../../Object/Stage/StageManager.h"
 #include "../../common.h"
 
+enum class eGameState
+{
+	GAME_MAIN = 0,
+	GAME_CLEAR,
+	GAMEO_OVER
+};
+
 class GameMainScene :
 	public SceneBase
 {
@@ -17,7 +24,11 @@ private:
 
 	int score;
 
-	StageManager stage_manager;
+	//StageManager stage_manager;
+
+	//ゲームメインの状態
+	eGameState game_state;
+	eGameState change_state;
 public:
 	GameMainScene();
 	~GameMainScene();
@@ -38,6 +49,14 @@ public:
 	//カメラの更新
 	void UpdateCamera();
 
+	//スコア加算
 	void AddScore(int _score);
+
+	//
+	void ChangeGameState(eGameState _state);
+
+	void GameClear();
+	void GameOver();
+
 };
 

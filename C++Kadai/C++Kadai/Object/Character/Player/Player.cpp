@@ -287,7 +287,7 @@ void Player::OnHitCollision(GameObject* hit_object)
 	//ギミックに当たった時
 	if (hit_object->GetObjectType() == GIMMICK)
 	{
-
+		game_main->ChangeGameState(eGameState::GAME_CLEAR);
 	}
 }
 
