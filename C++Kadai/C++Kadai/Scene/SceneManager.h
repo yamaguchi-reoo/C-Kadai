@@ -10,6 +10,8 @@ private:
     static SceneManager* instance;
     SceneBase* current_scene;   //現在シーン情報のポインタ
 
+    int score = 0; // スコアを保存する変数
+
 public:
     //インスタンス取得する処理
     static SceneManager* GetInstance();
@@ -35,6 +37,10 @@ public:
     {
         return dynamic_cast<GameMainScene*>(current_scene);
     }
+
+
+    void SetScore(int _score) { score = _score; }
+    int GetScore() const { return score; }
 
 private:
     void Draw() const;  //描画処理

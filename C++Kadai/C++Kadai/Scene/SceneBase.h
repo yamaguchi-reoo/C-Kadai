@@ -18,6 +18,7 @@ protected:
 
 	int cursor = 0;
 
+
 public:
 	//コンストラクタ
 	SceneBase();

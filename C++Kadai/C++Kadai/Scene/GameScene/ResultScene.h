@@ -4,6 +4,8 @@
 class ResultScene :
     public SceneBase
 {
+private:
+	int final_score;
 public:
 	ResultScene();
 	~ResultScene();

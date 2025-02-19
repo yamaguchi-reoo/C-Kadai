@@ -51,8 +51,11 @@ eSceneType GameMainScene::Update()
 	case eGameState::GAME_CLEAR:
 	case eGameState::GAME_OVER:
 		//決定
-		if (input->GetKeyDown(KEY_INPUT_SPACE)) {
-			if (cursor == 0)return eSceneType::RESULT;
+		if (input->GetKeyDown(KEY_INPUT_Z)) {
+			if (cursor == 0) {
+				SceneManager::GetInstance()->SetScore(score);
+				return eSceneType::RESULT;
+			}
 			else return eSceneType::TITLE;
 		}
 		break;

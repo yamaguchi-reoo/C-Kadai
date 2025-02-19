@@ -2,8 +2,9 @@
 #include "../../Utility/InputControl.h"
 #include <DxLib.h>
 #include "../../common.h"
+#include "../../Scene/SceneManager.h"
 
-ResultScene::ResultScene()
+ResultScene::ResultScene():final_score()
 {
 }
 
@@ -13,6 +14,7 @@ ResultScene::~ResultScene()
 
 void ResultScene::Initialize()
 {
+	final_score = SceneManager::GetInstance()->GetScore();
 }
 
 eSceneType ResultScene::Update()
@@ -25,7 +27,7 @@ eSceneType ResultScene::Update()
 
 
 	//決定
-	if (input->GetKeyDown(KEY_INPUT_SPACE)) {
+	if (input->GetKeyDown(KEY_INPUT_Z)) {
 		if (cursor == 0)
 		{
 			return eSceneType::GAME_MAIN;
@@ -43,6 +45,7 @@ void ResultScene::Draw() const
 {
 	SetFontSize(28);
 	DrawFormatString((SCREEN_WIDTH / 2) - 90, (SCREEN_HEIGHT / 2) - 200, GetColor(255, 255, 255), "リザルト画面");
+	DrawFormatString((SCREEN_WIDTH / 2) - 90, (SCREEN_HEIGHT / 2) - 170, GetColor(255, 255, 255), "SCORE : %d",final_score);
 
 	for (int i = 0; i < 2; i++)  // i は 0 から始める
 	{
